@@ -1,0 +1,1370 @@
+{
+  "version": 1,
+  "bodyParts": [
+    {
+      "code": "KNIFE_HAND",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Knife-hand", "ko": "Sonkal" }
+    },
+    {
+      "code": "REVERSE_KNIFE_HAND",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Reverse knife-hand", "ko": "Sonkal dung" }
+    },
+    {
+      "code": "PALM",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Palm", "ko": "Sonbadak" }
+    },
+    {
+      "code": "FINGERS",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Fingers", "ko": "Songarak" }
+    },
+    {
+      "code": "FINGERTIPS",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Fingertips", "ko": "Sonkut" }
+    },
+    {
+      "code": "THUMB",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Thumb", "ko": "Umji" }
+    },
+    {
+      "code": "FOREARM",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Forearm", "ko": "Palmok" }
+    },
+    {
+      "code": "INNER_FOREARM",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Inner forearm", "ko": "An palmok" }
+    },
+    {
+      "code": "OUTER_FOREARM",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Outer forearm", "ko": "Bakat palmok" }
+    },
+    {
+      "code": "ELBOW",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Elbow", "ko": "Palkup" }
+    },
+    {
+      "code": "SHOULDER",
+      "region": "ARM",
+      "canBeVitalPoint": false,
+      "names": { "en": "Shoulder", "ko": "Euhke" }
+    },
+
+
+
+    {
+      "code": "KNEE",
+      "region": "LEG",
+      "canBeVitalPoint": true,
+      "names": { "en": "Knee", "ko": "Moorup" }
+    },
+    {
+      "code": "SHIN",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Shin", "ko": "Jong kwaeng-i" }
+    },
+    {
+      "code": "ANKLE",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Ankle", "ko": "Balmok" }
+    },
+    {
+      "code": "INSTEP",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Instep", "ko": "Baldung" }
+    },
+    {
+      "code": "TOES",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Toes", "ko": "Balgarak" }
+    },
+    {
+      "code": "TOE_TIPS",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Toe tips", "ko": "Balkut" }
+    },
+    {
+      "code": "HEEL_BACK",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Heel back", "ko": "Dwichook" }
+    },
+    {
+      "code": "FOOT_BLADE",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Foot blade", "ko": "Balkal" }
+    },
+    {
+      "code": "HEEL_SOLE",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Heel sole", "ko": "Dwitkumchi" }
+    },
+    {
+      "code": "BALL_OF_FOOT",
+      "region": "LEG",
+      "canBeVitalPoint": false,
+      "names": { "en": "Ball of the foot", "ko": "Apkumchi" }
+    },
+
+
+
+    {
+      "code": "SOLAR_PLEXUS",
+      "region": "TORSO",
+      "canBeVitalPoint": true,
+      "names": { "en": "Solar plexus", "ko": "Myong chi" }
+    }
+  ],
+
+
+
+
+
+
+
+  "techniques":[
+    {
+      "name":  "Heaven and Earth",
+      "drawable":  "chonji",
+      "category":  "ALL_PATTERNS",
+      "patterns":  [
+        "Chon-Ji"
+      ],
+      "koreanTerms":  [
+        "CHON_JI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  0,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Dangun, the legendary founder of Gojoseon",
+      "drawable":  "dangun",
+      "category":  "ALL_PATTERNS",
+      "patterns":  [
+        "Dan-Gun"
+      ],
+      "koreanTerms":  [
+        "DAN_GUN"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  1,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Ahn Chang-ho, Korean independence activist",
+      "drawable":  "dosan",
+      "category":  "ALL_PATTERNS",
+      "patterns":  [
+        "Do-San"
+      ],
+      "koreanTerms":  [
+        "DO_SAN"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  2,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Won-Hyo, the monk who introduced Buddhism to Silla",
+      "drawable":  "wonhyo",
+      "category":  "ALL_PATTERNS",
+      "patterns":  [
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "WON_HYO"
+      ],
+      "beltLevel":  6,
+      "techniqueCode":  3,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Yi I, Confucian scholar, writer, and Korean philosopher",
+      "drawable":  "yulgok",
+      "category":  "ALL_PATTERNS",
+      "patterns":  [
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "YUL_GOK"
+      ],
+      "beltLevel":  5,
+      "techniqueCode":  4,
+      "videoVersion": 1
+    },
+    {
+      "name":  "philosopher",
+      "drawable":  "joongun",
+      "category":  "ALL_PATTERNS",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "JOONG_GUN"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  5,
+      "videoVersion": 1
+    },
+    {
+      "name":  "philher",
+      "drawable":  "toigye",
+      "category":  "ALL_PATTERNS",
+      "patterns":  [
+        "Toi-Gye"
+      ],
+      "koreanTerms":  [
+        "TOI_GYE"
+      ],
+      "beltLevel":  3,
+      "techniqueCode":  6,
+      "videoVersion": 1
+    },
+
+
+
+
+
+    {
+      "name":  "Attention Stance",
+      "drawable":  "attentionstance",
+      "category":  "STANCES",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "CHARYOT_SOGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  24,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Parallel Stance",
+      "drawable":  "parallelstance",
+      "category":  "STANCES",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "NARANI_SOGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  25,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Walking Stance",
+      "drawable":  "walkingstance",
+      "category":  "STANCES",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SOGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  26,
+      "videoVersion": 1
+    },
+    {
+      "name":  "L-Stance",
+      "drawable":  "lstance",
+      "category":  "STANCES",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SOGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  27,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Sitting Stance",
+      "drawable":  "sittingstance",
+      "category":  "STANCES",
+      "patterns":  [
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "ANNUN_SOGI"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  28,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Fixed Stance",
+      "drawable":  "fixedstance",
+      "category":  "STANCES",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "GOJUNG_SOGI"
+      ],
+      "beltLevel":  6,
+      "techniqueCode":  29,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Bending Ready Stance A",
+      "drawable":  "bendingreadystancea",
+      "category":  "STANCES",
+      "patterns":  [
+        "Won-Hyo",
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "GUBURYO_JUNBI_SOGI_A"
+      ],
+      "beltLevel":  6,
+      "techniqueCode":  30,
+      "videoVersion": 1
+    },
+    {
+      "name":  "X-Stance",
+      "drawable":  "xstance",
+      "category":  "STANCES",
+      "patterns":  [
+      ],
+      "koreanTerms":  [
+        "KYOCHA_SOGI"
+      ],
+      "beltLevel":  5,
+      "techniqueCode":  31,
+      "videoVersion": 1
+    },
+
+
+
+
+
+
+
+    {
+      "name":  "Inner Forearm Middle Block",
+      "drawable":  "innerforearmmiddleblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Chon-Ji"
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "KAUNDE",
+        "AN_PALMOK",
+        "YOP",
+        "MAKGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  41,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Inner Forearm Middle Block",
+      "drawable":  "walkingstanceinnerforearmmiddleblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "KAUNDE",
+        "AN_PALMOK",
+        "YOP",
+        "MAKGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  42,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Outer Forearm High Block",
+      "drawable":  "outerforearmhighblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Do-San"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NOPUNDE",
+        "BAKAT_PALMOK",
+        "YOP",
+        "MAKGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  43,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Outer Forearm Low Block",
+      "drawable":  "forearmlowblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Chon-Ji",
+        "Dan-Gun"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NAJUNDE",
+        "BAKAT_PALMOK",
+        "MAKGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  44,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Knife-hand Low Block",
+      "drawable":  "knifehandlowblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NAJUNDE",
+        "SONKAL",
+        "MAKGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  45,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Twin Forearm Block",
+      "drawable":  "twinforearmblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Dan-Gun",
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "SANG_PALMOK",
+        "MAKGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  50,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Twin Knife-hand Block",
+      "drawable":  "twinforearmblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "SANG_SONKAL",
+        "MAKGI"
+      ],
+      "beltLevel":  5,
+      "techniqueCode":  51,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Forearm Middle Guarding Block",
+      "drawable":  "forearmmiddleguardingblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "KAUNDE",
+        "PALMOK",
+        "DAEBI",
+        "MAKGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  55,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Knife-hand Middle Guarding Block",
+      "drawable":  "knifehandmiddleguardingblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Dan-Gun",
+        "Do-San",
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "KAUNDE",
+        "SONKAL",
+        "DAEBI",
+        "MAKGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  56,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Outer Forearm Rising Block",
+      "drawable":  "outerforearmrisingblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Dan-Gun",
+        "Do-San"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NOPUNDE",
+        "BAKAT_PALMOK",
+        "CHOOKYO",
+        "MAKGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  60,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Outer Forearm High Wedging Block",
+      "drawable":  "outerforearmhighwedgingblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Do-San"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NOPUNDE",
+        "BAKAT_PALMOK",
+        "HECHYO",
+        "MAKGI"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  65,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Inner Forearm Circular Block",
+      "drawable":  "innerforearmcircularblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "AN_PALMOK",
+        "DOLLIMYO",
+        "MAKGI"
+      ],
+      "beltLevel":  6,
+      "techniqueCode":  70,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Palm Hooking Block",
+      "drawable":  "palmhookingblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "KAUNDE",
+        "SONBADAK",
+        "GOLCHO",
+        "MAKGI"
+      ],
+      "beltLevel":  5,
+      "techniqueCode":  75,
+      "videoVersion": 1
+    },
+
+
+
+
+
+
+    {
+      "name":  "Middle Punch",
+      "drawable":  "walkingstancemiddlepunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Chon-Ji",
+        "Do-San",
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "KAUNDE",
+        "AP_JOOMUK",
+        "BARO",
+        "JIRUGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  140,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Reverse Punch",
+      "drawable":  "walkingstancemiddlereversepunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Do-San",
+        "Won-Hyo",
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "KAUNDE",
+        "AP_JOOMUK",
+        "BANDAE",
+        "JIRUGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  141,
+      "videoVersion": 1
+    },
+    {
+      "name":  "High Punch",
+      "drawable":  "walkingstancehighpunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Dan-Gun"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NOPUNDE",
+        "AP_JOOMUK",
+        "BARO",
+        "JIRUGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  142,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Punch",
+      "drawable":  "lstancemiddlepunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "KAUNDE",
+        "AP_JOOMUK",
+        "BARO",
+        "JIRUGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  143,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Punch",
+      "drawable":  "sittingstancemiddlepunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "ANNUN_SO",
+        "KAUNDE",
+        "AP_JOOMUK",
+        "AP",
+        "JIRUGI"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  145,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Punch",
+      "drawable":  "fixedstancemiddlepunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "GOJUNG_SO",
+        "KAUNDE",
+        "AP_JOOMUK",
+        "YOP",
+        "JIRUGI"
+      ],
+      "beltLevel":  6,
+      "techniqueCode":  150,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Knife-hand Middle Outward Strike",
+      "drawable":  "knifehandmiddleoutwardstrike",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Dan-Gun",
+        "Joong-Gunnnuss"
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "KAUNDE",
+        "SONKAL",
+        "BAKURO",
+        "TAERIGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  165,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Knife-hand High Inward Strike",
+      "drawable":  "knifehandhighinwardstrike",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Won-Hyo",
+        "Joong-Gunnnuss"
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "NOPUNDE",
+        "SONKAL",
+        "ANURO",
+        "TAERIGI"
+      ],
+      "beltLevel":  6,
+      "techniqueCode":  170,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Knife-hand Middle Side Strike",
+      "drawable":  "knifehandmiddlesidestrike",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Do-San"
+      ],
+      "koreanTerms":  [
+        "ANNUN_SO",
+        "KAUNDE",
+        "SONKAL",
+        "YOP",
+        "TAERIGI"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  175,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Backfist High Side Strike",
+      "drawable":  "backfisthighsidestrike",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Do-San"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NOPUNDE",
+        "DUNG",
+        "JOOMUK",
+        "YOP",
+        "TAERIGI"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  190,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Straight Fingertip Thrust",
+      "drawable":  "straightfingertipthrust",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Do-San",
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "KAUNDE",
+        "SUN",
+        "SONKUT",
+        "TULGI"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  200,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Front Elbow Strike",
+      "drawable":  "frontelbowstrike",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "KAUNDE",
+        "AP",
+        "PALKUP",
+        "TAERIGI"
+      ],
+      "beltLevel":  5,
+      "techniqueCode":  210,
+      "videoVersion": 1
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "name":  "Low Front Snap Kick",
+      "drawable":  "lowfrontsnapkick",
+      "category":  "KICKS",
+      "patterns":  [
+        "Won-Hyo",
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "NAJUNDE",
+        "APCHA",
+        "BUSIGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  250,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Front Snap Kick",
+      "drawable":  "middlefrontsnapkick",
+      "category":  "KICKS",
+      "patterns":  [
+        "Do-San"
+      ],
+      "koreanTerms":  [
+        "KAUNDE",
+        "APCHA",
+        "BUSIGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  251,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Side Piercing Kick",
+      "drawable":  "middlesidepiercingkick",
+      "category":  "KICKS",
+      "patterns":  [
+        "Won-Hyo",
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "KAUNDE",
+        "YOPCHA",
+        "JIRUGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  260,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Back Piercing Kick",
+      "drawable":  "middlebackpiercingkick",
+      "category":  "KICKS",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "KAUNDE",
+        "DWITCHA",
+        "JIRUGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  265,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Turning Kick",
+      "drawable":  "turningkick",
+      "category":  "KICKS",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  270,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Reverse Turning Kick",
+      "drawable":  "reverseturningkick",
+      "category":  "KICKS",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "BANDAE",
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  271,
+      "videoVersion": 1
+    }
+  ],
+
+
+
+
+
+  "patternvideodetails": [
+    {
+      "name": "chonji",
+      "timecodesMs": [
+        0,
+        1601,
+        3400,
+        5200,
+        6834,
+        8501,
+        10267,
+        12167,
+        13767,
+        15467,
+        17033,
+        18801,
+        20467,
+        22167,
+        23934,
+        25667,
+        27367,
+        29067,
+        30701,
+        33033
+      ],
+      "short": [
+        "palmok makgi",
+        "baro jirugi",
+        "palmok makgi",
+        "baro jirugi",
+        "palmok makgi",
+        "baro jirugi",
+        "palmok makgi",
+        "baro jirugi",
+        "anpalmok makgi",
+        "baro jirugi",
+        "anpalmok makgi",
+        "baro jirugi",
+        "anpalmok makgi",
+        "baro jirugi",
+        "anpalmok makgi",
+        "baro jirugi",
+        "baro jirugi",
+        "baro jirugi",
+        "baro jirugi",
+        "end"
+      ],
+      "full": [
+        "Move the left foot to B forming a left walking stance toward B while executing a low block to B with the left forearm. (Gunnun so palmok najunde makgi)",
+        "Move the right foot to B forming a right walking stance toward B while executing a middle punch to B with the right fist. (Gunnun so kaunde jirugi)",
+        "Move the right foot to A, turning clockwise to form a right walking stance toward A while executing a low block to A with the right forearm. (Gunnun so palmok najunde makgi)",
+        "Move the left foot to A forming a left walking stance toward A while executing a middle punch to A with the left fist. (Gunnun so kaunde jirugi)",
+        "Move the left foot to D forming a left walking stance toward D while executing a low block to D with the left forearm. (Gunnun so palmok najunde makgi)",
+        "Move the right foot to D forming a right walking stance toward D while executing a middle punch to D with the right fist. (Gunnun so kaunde jirugi)",
+        "Move the right foot to C turning clockwise to form a right walking stance toward C while executing a low block to C with the right forearm. (Gunnun so palmok najunde makgi)",
+        "Move the left foot to C forming a left walking stance toward C while executing a middle punch to C with the left fist. (Gunnun so kaunde jirugi)",
+        "Move the left foot to A forming a right L-stance toward A while executing a middle block to A with the left inner forearm. (Niunja so anpalmok kaunde yop makgi)",
+        "Move the right foot to A forming a right walking stance toward A while executing a middle punch to A with the right fist. (Gunnun so kaunde jirugi)",
+        "Move the right foot to B turning clockwise to form a left L-stance toward B while executing a middle block to B with the right inner forearm. (Niunja so anpalmok kaunde yop makgi)",
+        "Move the left foot to B forming a left walking stance toward B while executing a middle punch to B with the left fist. (Gunnun so kaunde jirugi)",
+        "Move the left foot to C forming a right L-stance toward C while executing a middle block to C with the left inner forearm. (Niunja so anpalmok kaunde yop makgi)",
+        "Move the right foot to C forming a right walking stance toward C while executing a middle punch to C with the right fist. (Gunnun so kaunde jirugi)",
+        "Move the right foot to D turning clockwise to form a left L-stance toward D while executing a middle block to D with the right inner forearm. (Niunja so anpalmok kaunde yop makgi)",
+        "Move the left foot to D forming a left walking stance toward D while executing a middle punch to D with the left fist. (Gunnun so kaunde jirugi)",
+        "Move the right foot to D forming a right walking stance toward D while executing a middle punch to D with the right fist. (Gunnun so kaunde jirugi)",
+        "Move the right foot to C forming a left walking stance toward D while executing a middle punch to D with the left fist. (Gunnun so kaunde jirugi)",
+        "Move the left foot to C forming a right walking stance toward D while executing a middle punch to D with the right fist. (Gunnun so kaunde jirugi)",
+        "END: Bring the left foot back to a ready posture."
+      ]
+
+    },
+    {
+      "name": "dangun",
+      "timecodesMs": [
+        0,
+        1601,
+        3400,
+        5200,
+        6834,
+        8501,
+        10267,
+        12167,
+        13767,
+        15467,
+        17033,
+        18801,
+        20467,
+        22167,
+        23934,
+        25667,
+        27367,
+        29067,
+        30701,
+        33033
+      ],
+      "short": [
+        "sonkal daebi makgi",
+        "baro jirugi",
+        "sonkal daebi makgi",
+        "baro jirugi",
+        "palmok makgi",
+        "baro jirugi",
+        "baro jirugi",
+        "baro jirugi",
+        "sang palmok makgi",
+        "baro jirugi",
+        "sang palmok makgi",
+        "baro jirugi",
+        "palmok makgi",
+        "palmok chookyo makgi",
+        "palmok chookyo makgi",
+        "palmok chookyo makgi",
+        "palmok chookyo makgi",
+        "sonkal taerigi",
+        "baro jirugi",
+        "sonkal taerigi",
+        "baro jirugi",
+        "end"
+      ],
+      "full": [
+        "Move the left foot to B forming a right L-stance toward B, at the same time executing a middle guarding block to B with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Move the right foot to B forming a right walking stance toward B while executing a high punch to B with the right fist. (Gunnun so nopunde jirugi)",
+        "Move the right foot to A turning clockwise to form a left L-stance toward A, at the same time executing a middle guarding block to A with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Move the left foot to A forming a left walking stance toward A while executing a high punch to A with the left fist. (Gunnun so nopunde jirugi)",
+        "Move the left foot to D forming a left walking stance toward D while executing a low block to D with the left forearm. (Gunnun so palmok najunde makgi)",
+        "Move the right foot to D forming a right walking stance toward D while executing a high punch to D with the right fist. (Gunnun so nopunde jirugi)",
+        "Move the left foot to D forming a left walking stance toward D while executing a high punch to D with the left fist. (Gunnun so nopunde jirugi)",
+        "Move the right foot to D forming a right walking stance toward D while executing a high punch to D with the right fist. (Gunnun so nopunde jirugi)",
+        "Move the left foot to E, turning counter clockwise to form a right L-stance toward E while executing a twin forearm block to E. (Niunja so sang palmok makgi)",
+        "Move the right foot to E forming a right walking stance toward E while executing a high punch to E with the right fist. (Gunnun so nopunde jirugi)",
+        "Move the right foot to F turning clockwise to form a left L-stance toward F while executing a twin forearm block to F. (Niunja so sang palmok makgi)",
+        "Move the left foot to F forming a left walking stance toward F while executing a high punch to F with the left fist. (Gunnun so nopunde jirugi)",
+        "Move the left foot to C forming a left walking stance toward C while executing a low block to C with the left forearm. (Gunnun so palmok najunde makgi)",
+        "Execute a rising block with the left forearm, maintaining the left walking stance toward C. (Gunnun so palmok chookyo makgi) Perform 13 and 14 in a continuous motion.",
+        "Move the right foot to C forming a right walking stance toward C, at the same time executing a rising block with the right forearm. (Gunnun so palmok chookyo makgi)",
+        "Move the left foot to C forming a left walking stance toward C, at the same time executing a rising block with the left forearm. (Gunnun so palmok chookyo makgi)",
+        "Move the right foot to C forming a right walking stance toward C, at the same time executing a rising block with the right forearm. (Gunnun so palmok chookyo makgi)",
+        "Move the left foot to B turning counter clockwise to form a right L-stance toward B while executing a middle outward strike to B with the left knife-hand. (Niunja so sonkal kaunde bakuro taerigi)",
+        "Move the right foot to B forming a right walking stance toward B while executing a high punch to B with the right fist. (Gunnun so nopunde jirugi)",
+        "Move the right foot to A turning clockwise to form a left L-stance toward A while executing a middle outward strike to A with the right knife-hand. (Niunja so sonkal kaunde bakuro taerigi)",
+        "Move the left foot to A forming a left walking stance toward A while executing a high punch to A with the left fist. (Gunnun so nopunde jirugi)",
+        "END: Bring the left foot back to a ready posture."
+      ]
+    },
+    {
+      "name": "dosan",
+      "timecodesMs": [
+        0,
+        1601,
+        3400,
+        5200,
+        6834,
+        8501,
+        10267,
+        12167,
+        13767,
+        15467,
+        17033,
+        18801,
+        20467,
+        22167,
+        23934,
+        25667,
+        27367,
+        29067,
+        30701,
+        33033
+      ],
+      "short": [
+        "palmok yop makgi",
+        "bandae jirugi",
+        "palmok yop makgi",
+        "bandae jirugi",
+        "sonkal daebi makgi",
+        "sonkut tulgi",
+        "dung joomuk taerigi",
+        "dung joomuk taerigi",
+        "palmok yop makgi",
+        "bandae jirugi",
+        "palmok yop makgi",
+        "bandae jirugi",
+        "palmok hechyo makgi",
+        "apcha busigi",
+        "baro jirugi",
+        "bandae jirugi",
+        "palmok hechyo makgi",
+        "apcha busigi",
+        "baro jirugi",
+        "baro jirugi",
+        "palmok chookyo makgi",
+        "palmok chookyo makgi",
+        "sonkal taerigi",
+        "sonkal taerigi",
+        "end"
+      ],
+      "full": [
+        "Move the left foot to B, forming a left walking stance toward B while executing a high side block to B with the left outer forearm. (Gunnun so bakat palmok nopunde yop makgi)",
+        "Execute a middle punch to B with the right fist while maintaining a left walking stance toward B. (Gunnun so kaunde bandae jirugi)",
+        "Move the left foot on line AB, and then turn clockwise to form a right walking stance toward A while executing a high side block to A with the right outer forearm. (Gunnun so bakat palmok nopunde yop makgi)",
+        "Execute a middle punch to A with the left fist while maintaining a right walking stance toward A. (Gunnun so kaunde bandae jirugi)",
+        "Move the left foot to D, forming a right L-stance toward D while executing a middle guarding block to D with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Move the right foot to D forming a right walking stance toward D while executing a middle thrust to D with the right straight fingertip. (Gunnun so sun sonkut kaunde tulgi)",
+        "Twist the right knife-hand together with the body counter clockwise until its palm faces downward and then move the left foot to D, turning counter clockwise to form a left walking stance toward D while executing a high side strike to D with the left back fist. (Jappyosul tae, gunnun so dung joomuk nopunde yop taerigi)",
+        "Move the right foot to D forming a right walking stance toward D while executing a high side strike to D with the right back fist. (Gunnun so dung joomuk nopunde yop taerigi)",
+        "Move the left foot to E, turning counter clockwise to form a left walking stance toward E while executing a high side block to E with the left outer forearm. (Gunnun so bakat palmok nopunde yop makgi)",
+        "Execute a middle punch to E with the right fist while maintaining a left walking stance toward E. (Gunnun so kaunde bandae jirugi)",
+        "Move the left foot on line EF, and then turn clockwise to form a right walking stance toward F while executing a high side block to F with the right outer forearm. (Gunnun so bakat palmok nopunde yop makgi)",
+        "Execute a middle punch to F with the left fist while maintaining a right walking stance toward F. (Gunnun so kaunde bandae jirugi)",
+        "Move the left foot to CE forming a left walking stance toward CE, at the same time executing a high wedging block to CE with the outer forearm. (Gunnun so bakat palmok nopunde hechyo makgi)",
+        "Execute a middle front snap kick to CE with the right foot, keeping the position of the hands as they were in 13. (Kaunde apcha busigi)",
+        "Lower the right foot to CE forming a right walking stance toward CE while executing a middle punch to CE with the right fist. (Gunnun so kaunde jirugi)",
+        "Execute a middle punch to CE with the left fist while maintaining a right walking stance toward CE. (Gunnun so kaunde bandae jirugi) Perform 15 and 16 in a fast motion.",
+        "Move the right foot to CF forming a right walking stance toward CF while executing a high wedging block to CF with the outer forearm. (Gunnun so bakat palmok nopunde hechyo makgi)",
+        "Execute a middle front snap kick to CF with the left foot, keeping the position of the hands as they were in 17. (Kaunde apcha busigi)",
+        "Lower the left foot to CF forming a left walking stance toward CF while executing a middle punch to CF with the left fist. (Gunnun so kaunde jirugi)",
+        "Execute a middle punch to CF with the right fist while maintaining a left walking stance toward CF. (Gunnun so kaunde jirugi) Perform 19 and 20 in a fast motion.",
+        "Move the left foot to C forming a left walking stance toward C, at the same time executing a rising block with the left forearm. (Gunnun so palmok chookyo makgi)",
+        "Move the right foot to C forming a right walking stance toward C while executing a rising block with the right forearm. (Gunnun so palmok chookyo makgi)",
+        "Move the left foot to B, turning counter clockwise to form a sitting stance toward D while executing a middle side strike to B with the left knife-hand. (Annun so wen sonkal kaunde yop taerigi)",
+        "Bring the left foot to the right foot and then move the right foot to A forming a sitting stance toward D while executing a middle side strike to A with the right knife-hand. (Annun so orun sonkal kaunde yop taerigi)",
+        "END: Bring the right foot back to a ready posture."
+      ]
+    },
+    {
+      "name": "wonhyo",
+      "timecodesMs": [
+        0,
+        1601,
+        3400,
+        5200,
+        6834,
+        8501,
+        10267,
+        12167,
+        13767,
+        15467,
+        17033,
+        18801,
+        20467,
+        22167,
+        23934,
+        25667,
+        27367,
+        29067,
+        30701,
+        33033
+      ],
+      "short": [
+        "sang palmok makgi",
+        "sonkal taerigi",
+        "yop jirugi",
+        "sang palmok makgi",
+        "sonkal taerigi",
+        "yop jirugi",
+        "yopcha jirugi",
+        "sonkal daebi makgi",
+        "sonkal daebi makgi",
+        "sonkal daebi makgi",
+        "sonkut tulgi",
+        "sang palmok makgi",
+        "sonkal taerigi",
+        "yop jirugi",
+        "sang palmok makgi",
+        "sonkal taerigi",
+        "yop jirugi",
+        "palmok dollimyo makgi",
+        "apcha busigi",
+        "bandae jirugi",
+        "palmok dollimyo makgi",
+        "apcha busigi",
+        "bandae jirugi",
+        "yopcha jirugi",
+        "sonkal daebi makgi",
+        "sonkal daebi makgi",
+        "end"
+      ],
+      "full": [
+        "Move the left foot to B forming a right L-stance toward B while executing a twin forearm block. (Niunja so sang palmok makgi)",
+        "Execute a high inward strike to B with the right knife-hand while bringing the left side fist in front of the right shoulder, maintaining a right L-stance toward B. (Niunja so sonkal nopunde anuro taerigi)",
+        "Execute a middle punch to B with the left fist while forming a left fixed stance toward B, slipping the left foot to B. (Gojung so kaunde yop jirugi)",
+        "Bring the left foot to the right foot and then move the right foot to A, forming a left L-stance toward A while executing a twin forearm block. (Niunja so sang palmok makgi)",
+        "Execute a high inward strike to A with the left knife-hand while bringing the right side fist in front of the left shoulder, maintaining a left L-stance toward A. (Niunja so sonkal nopunde anuro taerigi)",
+        "Execute a middle punch to A with the right fist while forming a right fixed stance toward A, slipping the right foot to A. (Gojung so kaunde yop jirugi)",
+        "Bring the right foot to the left foot and then turn the face toward D while forming a right bending ready stance A toward D. (Guburyo junbi sogi A)",
+        "Execute a middle side piercing kick to D with the left foot. (Kaunde yopcha jirugi)",
+        "Lower the left foot to D forming a right L-stance toward D while executing a middle guarding block to D with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Move the right foot to D forming a left L-stance toward D while executing a guarding block to D with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Move the left foot to D forming a right L-stance toward D while executing a middle guarding block to D with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Move the right foot to D forming a right walking stance toward D while executing a middle thrust to D with the right straight fingertip. (Gunnun so sun sonkut kaunde tulgi)",
+        "Move the left foot to E turning counter clockwise to form a right L-stance toward E, at the same time executing a twin forearm block. (Niunja so sang palmok makgi)",
+        "Execute a high inward strike to E with the right knife-hand while bringing the left side fist in front of the right shoulder, maintaining a right L-stance toward E. (Niunja so sonkal nopunde anuro taerigi)",
+        "Execute a middle punch to E with the left fist while forming a left fixed stance toward E, slipping the left foot to E. (Gojung so kaunde yop jirugi)",
+        "Bring the left foot to the right foot and then move the right foot to F, forming a left L-stance toward F while executing a twin forearm block. (Niunja so sang palmok makgi)",
+        "Execute a high inward strike to F with the left knife-hand while bringing the right side fist in front of the left shoulder, maintaining a left L-stance toward F. (Niunja so sonkal nopunde anuro taerigi)",
+        "Execute a middle punch to F with the right fist while forming a right fixed stance toward F, slipping the right foot to F. (Gojung so kaunde yop jirugi)",
+        "Bring the right foot to the left foot and then move the left foot to C forming a left walking stance toward C while executing a circular block to CF with the right inner forearm. (Gunnun so anpalmok dollimyo makgi)",
+        "Execute a low front snap kick to C with the right foot, keeping the position of the hands as they were in 19. (Najunde apcha busigi)",
+        "Lower the right foot to C forming a right walking stance toward C while executing a middle punch to C with the left fist. (Gunnun so kaunde bandae jirugi)",
+        "Execute a circular block to CE with the left inner forearm while maintaining a right walking stance toward C. (Gunnun so anpalmok dollimyo makgi)",
+        "Execute a low front snap kick to C with the left foot, keeping the position of the hands as they were in 22. (Najunde apcha busigi)",
+        "Lower the left foot to C forming a left walking stance toward C while executing a middle punch to C with the right fist. (Gunnun so kaunde bandae jirugi)",
+        "Turn the face toward C forming a left bending ready stance A toward C. (Guburyo junbi sogi A)",
+        "Execute a middle side piercing kick to C with the right foot. (Kaunde yopcha jirugi)",
+        "Lower the right foot on line CD and then move the left foot to B, turning counter clockwise to form a right L-stance toward B, at the same time executing a middle guarding block to B with the forearm. (Niunja so palmok kaunde daebi makgi)",
+        "Bring the left foot to the right foot and then move the right foot to A forming a left L-stance toward A while executing a middle guarding block to A with the forearm. (Niunja so palmok kaunde daebi makgi)",
+        "END: Bring the right foot back to a ready posture."
+      ]
+    },
+    {
+      "name": "yulgok",
+      "timecodesMs": [
+        0,
+        1601,
+        3400,
+        5200,
+        6834,
+        8501,
+        10267,
+        12167,
+        13767,
+        15467,
+        17033,
+        18801,
+        20467,
+        22167,
+        23934,
+        25667,
+        27367,
+        29067,
+        30701,
+        33033
+      ],
+      "short": [
+        "annun sogi",
+        "baro jirugi",
+        "bandae jirugi",
+        "annun sogi",
+        "baro jirugi",
+        "bandae jirugi",
+        "palmok yop makgi",
+        "apcha busigi",
+        "baro jirugi",
+        "bandae jirugi",
+        "palmok yop makgi",
+        "apcha busigi",
+        "baro jirugi",
+        "bandae jirugi",
+        "sonbadak golcho makgi",
+        "sonbadak golcho makgi",
+        "baro jirugi",
+        "sonbadak golcho makgi",
+        "sonbadak golcho makgi",
+        "bandae jirugi",
+        "baro jirugi",
+        "guburyo junbi sogi a",
+        "yopcha jirugi",
+        "palkup taerigi",
+        "guburyo junbi sogi a",
+        "yopcha jirugi",
+        "palkup taerigi",
+        "sang sonkal makgi",
+        "sonkut tulgi",
+        "sang sonkal makgi",
+        "sonkut tulgi",
+        "palmok yop makgi",
+        "bandae jirugi",
+        "palmok yop makgi",
+        "bandae jirugi",
+        "dung joomuk taerigi",
+        "doo palmok makgi",
+        "doo palmok makgi",
+        "end"
+      ],
+      "full": [
+        "Move the left foot to B forming a sitting stance toward D while extending the left fist to D horizontally. (Annun sogi)",
+        "Execute a middle punch to D with the right fist while maintaining a sitting stance toward D. (Annun so orun joomuk kaunde ap jirugi)",
+        "Execute a middle punch to D with the left fist while maintaining a sitting stance toward D. (Annun so wen joomuk kaunde ap jirugi) Perform 2 and 3 in a fast motion.",
+        "Bring the left foot to the right foot and then move the right foot to A forming a sitting stance toward D while extending the right fist to D horizontally. (Annun sogi)",
+        "Execute a middle punch to D with the left fist while maintaining a sitting stance toward D. (Annun so wen joomuk kaunde ap jirugi)",
+        "Execute a middle punch to D with the right fist while maintaining a sitting stance toward D. (Annun so orun joomuk kaunde ap jirugi) Perform 5 and 6 in a fast motion.",
+        "Move the right foot to AD forming a right walking stance toward AD while executing a middle side block to AD with the right inner forearm. (Gunnun so anpalmok kaunde yop makgi)",
+        "Execute a low front snap kick to AD with the left foot keeping the position of the hands as they were in 7. (Najunde apcha busigi)",
+        "Lower the left foot to AD forming a left walking stance toward AD while executing a middle punch to AD with the left fist. (Gunnun so kaunde jirugi)",
+        "Execute a middle punch to AD with the right fist while maintaining a left walking stance toward AD. (Gunnun so kaunde bandae jirugi) Perform 9 and 10 in a fast motion.",
+        "Move the left foot to BD forming a left walking stance toward BD at the same time executing a middle side block to BD with the left inner forearm. (Gunnun so anpalmok kaunde yop makgi)",
+        "Execute a low front snap kick to BD with the right foot keeping the position of the hands as they were in 11. (Najunde apcha busigi)",
+        "Lower the right foot to BD forming a right walking stance toward BD while executing a middle punch to BD with the right fist. (Gunnun so kaunde jirugi)",
+        "Execute a middle punch to BD with the left fist while maintaining a right walking stance toward BD. (Gunnun so kaunde bandae jirugi) Perform 13 and 14 in a fast motion.",
+        "Execute a middle hooking block to D with the right palm while forming a right walking stance toward D, pivoting with the left foot. (Gunnun so sonbadak kaunde golcho makgi)",
+        "Execute a middle hooking block to D with the left palm while maintaining a right walking stance toward D. (Gunnun so sonbadak kaunde bandae golcho makgi)",
+        "Execute a middle punch to D with the right fist while maintaining a right walking stance toward D. (Gunnun so kaunde jirugi) Perform 16 and 17 in a connecting motion.",
+        "Move the left foot to D forming a left walking stance toward D while executing a middle hooking block to D with the left palm. (Gunnun so sonbadak kaunde golcho makgi)",
+        "Execute a middle hooking block to D with the right palm while maintaining a left walking stance toward D. (Gunnun so sonbadak kaunde bandae golcho makgi)",
+        "Execute a middle punch to D with the left fist while maintaining a left walking stance toward D. (Gunnun so kaunde jirugi) Perform 19 and 20 in a connecting motion.",
+        "Move the right foot to D forming a right walking stance toward D at the same time executing a middle punch to D with the right fist. (Gunnun so kaunde jirugi)",
+        "Turn the face toward D forming a right bending ready stance A toward D. (Guburyo junbi sogi A)",
+        "Execute a middle side piercing kick to D with the left foot. (Kaunde yopcha jirugi)",
+        "Lower the left foot to D forming a left walking stance toward D while striking the left palm with the right front elbow. (Gunnun so ap palkup bandae taerigi)",
+        "Turn the face toward C forming a left bending ready stance A toward C. (Guburyo junbi sogi A)",
+        "Execute a middle side piercing kick to C with the right foot. (Kaunde yopcha jirugi)",
+        "Lower the right foot to C forming a right walking stance toward C while striking the right palm with the left front elbow. (Gunnun so ap palkup bandae taerigi)",
+        "Move the left foot to E forming a right L-stance toward E while executing a twin knife-hand block. (Niunja so sang sonkal makgi)",
+        "Move the right foot to E forming a right walking stance toward E while executing a middle thrust to E with the right straight finger tip. (Gunnun so sun sonkut kaunde tulgi)",
+        "Move the right foot to F turning clockwise to form a left L-stance toward F while executing a twin knife-hand block. (Niunja so sang sonkal makgi)",
+        "Move the left foot to F forming a left walking stance toward F while executing a middle thrust to F with the left straight finger tip. (Gunnun so sun sonkut kaunde tulgi)",
+        "Move the left foot to C forming a left walking stance toward C while executing a high side block to C with the left outer forearm. (Gunnun so bakat palmok nopunde yop makgi)",
+        "Execute a middle punch to C with the right fist while maintaining a left walking stance toward C. (Gunnun so kaunde bandae jirugi)",
+        "Move the right foot to C forming a right walking stance toward C while executing a high side block to C with the right outer forearm. (Gunnun so bakat palmok nopunde yop makgi)",
+        "Execute a middle punch to C with the left fist while maintaining a right walking stance toward C. (Gunnun so kaunde bandae jirugi)",
+        "Jump to C forming a left X-stance toward B while executing a high side strike to C with the left back fist. (Twigi, wen kyocha so dung joomuk nopunde yop taerigi)",
+        "Move the right foot to A forming a right walking stance toward A at the same time executing a high block to A with the right double forearm. (Gunnun so doo palmok nopunde makgi)",
+        "Bring the right foot to the left foot and then move the left foot to B forming a left walking stance toward B while executing a high block to B with the left double forearm. (Gunnun so doo palmok nopunde makgi)",
+        "END: Bring the left foot back to a ready posture."
+      ]
+    }
+  ]
+}
