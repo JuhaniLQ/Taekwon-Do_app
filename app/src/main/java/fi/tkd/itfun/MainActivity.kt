@@ -13,18 +13,15 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -60,9 +57,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.changedToDownIgnoreConsumed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.colorResource
@@ -316,11 +314,19 @@ fun Pager(){
     LaunchedEffect(pagerState.currentPage) {
         selectedTabIndex = pagerState.currentPage
     }
-    Box(
+    Box( // close search bar keyboard when touching outside keyboard
         Modifier
             .fillMaxSize()
             .pointerInput(Unit) {
-                detectTapGestures(onTap = { focusManager.clearFocus() })
+                awaitPointerEventScope {
+                    while (true) {
+                        val event = awaitPointerEvent(PointerEventPass.Final)
+                        val down = event.changes.any { it.changedToDownIgnoreConsumed() }
+                        if (down) {
+                            focusManager.clearFocus()
+                        }
+                    }
+                }
             }
     ) {
         Column {
@@ -388,7 +394,7 @@ fun Pager(){
                 }
             }
             val sheetState = rememberModalBottomSheetState()
-            var sheetPage by rememberSaveable { mutableStateOf(0) }
+            var sheetPage by rememberSaveable { mutableIntStateOf(0) }
 
             if (isSheetOpen) {
                 ModalBottomSheet(
@@ -544,36 +550,19 @@ fun ScreenTwo(
               selectedFilters: MutableState<Set<String>>,
               patternStr: String,
               beltGup: Int) {
-    val focusManager = LocalFocusManager.current
-    val density = LocalDensity.current
-    val imeVisible = WindowInsets.ime.getBottom(density) > 0
-
-    Box(modifier = Modifier.fillMaxSize()) {
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Techniques(
-                tkdItemsRoom = tkdItemsRoom,
-                selectedTab = selectedTab,
-                selectedPattern = selectedPattern,
-                selectedFilters = selectedFilters,
-                patternStr = patternStr,
-                beltGup = beltGup
-            )
-        }
-
-        if (imeVisible) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .pointerInput(Unit) {
-                        detectTapGestures(onTap = { focusManager.clearFocus() })
-                    }
-            )
-        }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Techniques(
+            tkdItemsRoom = tkdItemsRoom,
+            selectedTab = selectedTab,
+            selectedPattern = selectedPattern,
+            selectedFilters = selectedFilters,
+            patternStr = patternStr,
+            beltGup = beltGup
+        )
     }
 }
 

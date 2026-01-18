@@ -9,6 +9,7 @@ import fi.tkd.itfun.TKDPatterns
 import fi.tkd.itfun.data.db.DbProvider.get
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
@@ -98,13 +99,16 @@ object DbProvider {
     private suspend fun seedItemsFromJson(
         db: AppDatabase,
         oldItemsByCode: Map<Int, ItemEntity>,
-        root: org.json.JSONObject
+        root: JSONObject
     ) {
         val bodyPartsArray = root.getJSONArray("bodyParts")
-        seedBodyPartsFromArray(db, bodyPartsArray)
-
+        val patternDetailsObject = root.getJSONObject("patternvideodetails")
         val techniquesArray = root.getJSONArray("techniques")
-        seedTechniquesFromArray(db, techniquesArray, oldItemsByCode)
+
+        seedBodyPartsFromArray(db, bodyPartsArray)
+        seedTechniquesFromArray(db, techniquesArray, oldItemsByCode, termKeyToNameMap(root))
+        seedPatternVideoDetails(db, patternDetailsObject)
+
         val manifestVersion = root.optInt("version", 1)
         db.contentMetaDao().put(
             ContentMetaEntity(JSON_MANIFEST_VERSION_KEY, manifestVersion)
@@ -112,10 +116,16 @@ object DbProvider {
     }
 }
 
-private fun termKeyToNameMap(): Map<String, String> =
-    fi.tkd.itfun.TKDTerms::class.java.fields
-        .filter { it.type == String::class.java }
-        .associate { f -> f.name to (f.get(null) as String) }
+private fun termKeyToNameMap(root: JSONObject): Map<String, String> {
+    val obj = root.getJSONObject("terms")
+    val result = mutableMapOf<String, String>()
+    val keys = obj.keys()
+    while (keys.hasNext()) {
+        val key = keys.next()
+        result[key] = obj.getString(key)
+    }
+    return result
+}
 
 
 private fun composeKorean(sortedTermNames: List<String>) =
@@ -147,11 +157,11 @@ private suspend fun seedBodyPartsFromArray(db: AppDatabase, bodyPartsArray: org.
 private suspend fun seedTechniquesFromArray(
     db: AppDatabase,
     array: org.json.JSONArray,
-    oldItemsByCode: Map<Int, ItemEntity>
+    oldItemsByCode: Map<Int, ItemEntity>,
+    termKeyToName : Map<String, String>
 ) {
     val catIdByName = db.categoryDao().getAllNow().associate { it.name to it.id }
     val patIdByName = db.patternDao().getAllNow().associate { it.name to it.id }
-    val termKeyToName = termKeyToNameMap()
 
     val itemDao = db.itemDao()
     val linkBuffer = mutableListOf<ItemPatternCrossRef>()
@@ -213,11 +223,39 @@ private suspend fun seedTechniquesFromArray(
     if (linkBuffer.isNotEmpty()) itemDao.insertLinks(linkBuffer)
 }
 
+private suspend fun seedPatternVideoDetails(
+    db: AppDatabase,
+    obj: JSONObject
+) {
+    val dao = db.patternVideoDetailsDao()
+
+    val list = mutableListOf<PatternVideoDetailsEntity>()
+
+    val keys = obj.keys()
+    while (keys.hasNext()) {
+        val videoKey = keys.next()             // e.g. "chonji"
+        val entry = obj.getJSONObject(videoKey)
+
+        val timecodes = entry.getJSONArray("timecodesMs").toString()
+        val short = entry.getJSONArray("short").toString()
+        val full = entry.getJSONArray("full").toString()
+
+        list += PatternVideoDetailsEntity(
+            videoKey = videoKey,
+            timecodesJson = timecodes,
+            shortJson = short,
+            fullJson = full
+        )
+    }
+
+    dao.deleteAll()
+    dao.insertAll(list)
+}
 
 private const val REMOTE_MANIFEST_URL = //please do not misuse this web address, so I can continue to offer the contents of this app
     "https://pub-ac21b0d2bd5842ec912448a452ab1b38.r2.dev/manifest/tkd_items.json"
 
-private suspend fun loadManifestJson(context: Context): org.json.JSONObject =
+private suspend fun loadManifestJson(context: Context): JSONObject =
     withContext(Dispatchers.IO) {
         runCatching {
             val url = URL(REMOTE_MANIFEST_URL)
@@ -227,17 +265,17 @@ private suspend fun loadManifestJson(context: Context): org.json.JSONObject =
             }
             conn.inputStream.bufferedReader().use { reader ->
                 val text = reader.readText()
-                org.json.JSONObject(text)
+                JSONObject(text)
             }
         }.getOrElse { e ->
             Log.w("DBDEBUG", "Remote manifest fetch failed, falling back to assets", e)
             val fallbackText =
                 context.assets.open("tkd_items.json").bufferedReader().use { it.readText() }
-            org.json.JSONObject(fallbackText)
+            JSONObject(fallbackText)
         }
     }
 
-suspend fun loadManifestJsonNoFallback(): org.json.JSONObject? =
+suspend fun loadManifestJsonNoFallback(): JSONObject? =
     withContext(Dispatchers.IO) {
         runCatching {
             val url = URL(REMOTE_MANIFEST_URL)
@@ -246,7 +284,7 @@ suspend fun loadManifestJsonNoFallback(): org.json.JSONObject? =
                 readTimeout = 5000
             }
             conn.inputStream.bufferedReader().use { reader ->
-                org.json.JSONObject(reader.readText())
+                JSONObject(reader.readText())
             }
         }.getOrElse { e ->
             Log.w("DBDEBUG", "Remote manifest fetch failed", e)
