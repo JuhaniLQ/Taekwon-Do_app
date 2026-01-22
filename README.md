@@ -8,4 +8,4 @@ Use it to **review and recall techniques** you have already learned, *not* as a 
   [https://github.com/JuhaniLQ/Taekwon-Do_app/releases](https://github.com/JuhaniLQ/Taekwon-Do_app/releases)
 
 - Or get the **latest version** directly:  
-  [https://github.com/JuhaniLQ/Taekwon-Do_app/releases/download/v0.1/release_v0.1.zip](https://github.com/JuhaniLQ/Taekwon-Do_app/releases/download/v0.1/release_v0.1.zip)
+  [https://github.com/JuhaniLQ/Taekwon-Do_app/releases/download/v0.7/ITFun_v0.7_release.apk](https://github.com/JuhaniLQ/Taekwon-Do_app/releases/download/v0.7/ITFun_v0.7_release.apk)
