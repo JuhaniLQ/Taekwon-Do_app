@@ -22,14 +22,14 @@ import fi.tkd.itfun.PrefKeys.PRIMARY_COLOR
 
 private val DarkColorScheme = darkColorScheme(
     surface = Color.Black,
-    onSurface = Blue,
+    onSurface = Color.White,
     primary = Navy,
     onPrimary = Chartreuse
 )
 
 private val LightColorScheme = lightColorScheme(
     surface = Color.White,
-    onSurface = Blue,
+    onSurface = Color.Black,
     primary = Navy,
     onPrimary = Chartreuse
 )

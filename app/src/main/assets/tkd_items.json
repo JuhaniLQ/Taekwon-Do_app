@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "bodyParts": [
     {
       "code": "KNIFE_HAND",
@@ -138,6 +138,14 @@
       "region": "TORSO",
       "canBeVitalPoint": true,
       "names": { "en": "Solar plexus", "ko": "Myong chi" }
+    },
+
+
+    {
+      "code": "TEMPLE",
+      "region": "HEAD",
+      "canBeVitalPoint": true,
+      "names": { "en": "Temple", "ko": "Gwanja nori" }
     }
   ],
 
@@ -219,8 +227,8 @@
       "videoVersion": 1
     },
     {
-      "name":  "philosopher",
-      "drawable":  "joongun",
+      "name": "Ahn Choong-Gun, Korean patriot and independence activist",
+      "drawable":  "joonggun",
       "category":  "ALL_PATTERNS",
       "patterns":  [
         "Joong-Gun"
@@ -233,7 +241,7 @@
       "videoVersion": 1
     },
     {
-      "name":  "philher",
+      "name":  "TODO",
       "drawable":  "toigye",
       "category":  "ALL_PATTERNS",
       "patterns":  [
@@ -351,6 +359,20 @@
       "videoVersion": 1
     },
     {
+      "name":  "Close Stance",
+      "drawable":  "closestance",
+      "category":  "STANCES",
+      "patterns":  [
+        "Won-Hyo"
+      ],
+      "koreanTerms":  [
+        "MOA_SOGI"
+      ],
+      "beltLevel":  6,
+      "techniqueCode":  31,
+      "videoVersion": 1
+    },
+    {
       "name":  "X-Stance",
       "drawable":  "xstance",
       "category":  "STANCES",
@@ -360,7 +382,35 @@
         "KYOCHA_SOGI"
       ],
       "beltLevel":  5,
-      "techniqueCode":  31,
+      "techniqueCode":  32,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Rear Foot Stance",
+      "drawable":  "rearfootstance",
+      "category":  "STANCES",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "DWITBAL_SOGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  33,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Low Stance",
+      "drawable":  "lowstance",
+      "category":  "STANCES",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "NACHUA_SOGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  34,
       "videoVersion": 1
     },
 
@@ -478,7 +528,7 @@
     },
     {
       "name":  "Twin Knife-hand Block",
-      "drawable":  "twinforearmblock",
+      "drawable":  "twinknifehandblock",
       "category":  "DEFENSIVE",
       "patterns":  [
         "Yul-Gok"
@@ -684,6 +734,23 @@
       "videoVersion": 1
     },
     {
+      "name":  "Middle Reverse Punch",
+      "drawable":  "lstancemiddlereversepunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+      ],
+      "koreanTerms":  [
+        "NIUNJA_SO",
+        "KAUNDE",
+        "AP_JOOMUK",
+        "BANDAE",
+        "JIRUGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  144,
+      "videoVersion": 1
+    },
+    {
       "name":  "Middle Punch",
       "drawable":  "sittingstancemiddlepunch",
       "category":  "OFFENSIVE",
@@ -712,7 +779,7 @@
         "GOJUNG_SO",
         "KAUNDE",
         "AP_JOOMUK",
-        "YOP",
+        "BARO",
         "JIRUGI"
       ],
       "beltLevel":  6,
@@ -882,6 +949,23 @@
       "videoVersion": 1
     },
     {
+      "name":  "Low Side Front Snap Kick",
+      "drawable":  "lowsidefrontsnapkick",
+      "category":  "KICKS",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "NAJUNDE",
+        "YOP",
+        "APCHA",
+        "BUSIGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  252,
+      "videoVersion": 1
+    },
+    {
       "name":  "Middle Side Piercing Kick",
       "drawable":  "middlesidepiercingkick",
       "category":  "KICKS",
@@ -915,34 +999,87 @@
       "videoVersion": 1
     },
     {
-      "name":  "Turning Kick",
-      "drawable":  "turningkick",
+      "name":  "Middle Turning Kick",
+      "drawable":  "middleturningkick",
       "category":  "KICKS",
       "patterns":  [
 
       ],
       "koreanTerms":  [
+        "KAUNDE",
         "DOLLYO",
         "CHAGI"
       ],
       "beltLevel":  9,
-      "techniqueCode":  270,
+      "techniqueCode":  267,
       "videoVersion": 1
     },
     {
-      "name":  "Reverse Turning Kick",
-      "drawable":  "reverseturningkick",
+      "name":  "High Side Turning Kick",
+      "drawable":  "highsideturningkick",
       "category":  "KICKS",
       "patterns":  [
 
       ],
       "koreanTerms":  [
+        "NOPUNDE",
+        "YOP",
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  268,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Low Reverse Turning Kick",
+      "drawable":  "lowreverseturningkick",
+      "category":  "KICKS",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "NAJUNDE",
         "BANDAE",
         "DOLLYO",
         "CHAGI"
       ],
       "beltLevel":  8,
       "techniqueCode":  271,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Reverse Turning Kick",
+      "drawable":  "middlereverseturningkick",
+      "category":  "KICKS",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "KAUNDE",
+        "BANDAE",
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  272,
+      "videoVersion": 1
+    },
+    {
+      "name":  "High Reverse Turning Kick",
+      "drawable":  "highreverseturningkick",
+      "category":  "KICKS",
+      "patterns":  [
+
+      ],
+      "koreanTerms":  [
+        "NOPUNDE",
+        "BANDAE",
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  273,
       "videoVersion": 1
     }
   ],
@@ -970,8 +1107,11 @@
     "GOJUNG_SOGI": "Gojung Sogi",
     "CHARYOT_SOGI": "Charyot Sogi",
     "NARANI_SOGI": "Narani Sogi",
+    "MOA_SOGI": "Moa Sogi",
     "GUBURYO_JUNBI_SOGI_A": "Guburyo Junbi Sogi A",
     "KYOCHA_SOGI": "Kyocha Sogi",
+    "DWITBAL_SOGI": "Dwitbal Sogi",
+    "NACHUA_SOGI": "Nachua Sogi",
 
     "BAKAT_PALMOK": "Bakat Palmok",
     "AN_PALMOK": "An Palmok",
@@ -1019,6 +1159,311 @@
     "TWIMYO": "Twimyo",
     "GOLCHO": "Golcho"
   },
+
+  "stances": {
+    "section": "compendium",
+    "title": {
+      "en": "Stances",
+      "fi": "Asennot"
+    },
+    "entries": {
+      "attentionstance": {
+        "title": {
+          "en": "Attention Stance — Charyot Sogi",
+          "fi": "Huomioasento"
+        },
+        "description": {
+          "en": "This is an attention position used before and after each exercise. Feet form a 45 degrees angle. Drop the fists down naturally, bending the elbows slightly. The fists are clenched slightly. Eyes face the front slightly above the horizontal line. When bowing (Kyong Ye Jase) Bend the body 15 degrees forward. Keep eyes fixed on opponent's eyes.",
+          "fi": "Tämä on huomioasento, jota käytetään ennen ja jälkeen jokaisen harjoituksen. Jalkaterät muodostavat 45 asteen kulman. Nyrkit lasketaan luonnollisesti alas ja kyynärpäät ovat hieman koukussa. Nyrkit ovat kevyesti puristettuina. Katse suunnataan eteenpäin hieman horisontaalitason yläpuolelle. Kumartaessa (Kyong Ye Jase) Vartaloa taivutetaan 15 astetta eteenpäin. Katse pidetään vastustajan silmissä."
+        },
+        "resources": {
+          "images": ["attentionstance_", "attentionstance"]
+        }
+      },
+      "parallelstance": {
+        "title": {
+          "en": "Parallel Ready Stance — Narani Junbi Sogi",
+          "fi": "Rinnakkaisvalmiusasento"
+        },
+        "description": {
+          "en": "This is a parallel stance with both fists brought naturally over the abdomen. Spread the feet parallel to shoulder width. Keep the toes pointing toward the front. The distance between fists is about five centimeters and seven centi-meters away from the abdomen. The distance between the elbows and the floating ribs is about 10 centimeters. Do not extend the elbow to the side more than necessary. Hold the upper arms forward 30 degrees while bending the forearms 40 degrees upward. This stance serve primarily as preparatory actions though occasionally used for attack or defence.",
+          "fi": "Tämä on rinnakkaisasento, jossa molemmat nyrkit tuodaan luonnollisesti alavatsan eteen. Jalat asetetaan rinnakkain hartioiden leveydelle. Varpaiden tulee osoittaa eteenpäin. Nyrkkien välinen etäisyys on noin viisi senttimetriä ja niiden etäisyys vatsasta noin seitsemän senttimetriä. Kyynärpäiden ja kylkiluiden välinen etäisyys on noin 10 senttimetriä. Kyynärpäitä ei tule viedä sivuille enempää kuin on tarpeen. Olkavarret pidetään noin 30 asteen kulmassa eteenpäin, ja kyynärvarret taivutetaan noin 40 asteen kulmaan ylöspäin. Tätä asentoa käytetään ensisijaisesti valmistavana asentona, mutta sitä voidaan toisinaan käyttää myös hyökkäykseen tai puolustukseen."
+        },
+        "resources": {
+          "images": ["parallelstance_", "parallelstance"]
+        }
+      },
+      "walkingstance": {
+        "title": {
+          "en": "Walking Stance — Gunnun Sogi",
+          "fi": "Kävelyasento"
+        },
+        "description": {
+          "en": "This is a strong stance for both front and rear movement, used in both attack and defense.\\n\\nMove one foot either to the front or rear so that the distance between the big toes is approximately one and a half shoulder widths, and the distance from the center of one instep to the other is one shoulder width.\\n\\nA distance greater than one and a half shoulder widths makes movement slower and weaker against attacks from the side, and also weaker against attacks from the front or rear.\\n\\nBend the front leg until the kneecap forms a vertical line with the heel, while extending the opposite leg fully.\\n\\nDistribute the body weight evenly on both feet.\\n\\nKeep the toes of the front foot pointing forward and the opposite foot angled about 25 degrees outward.\\n\\nAn angle greater than 25 degrees weakens the leg joint against an attack from the rear.\\n\\nTense the muscles of the feet with the feeling of pulling them toward each other.\\n\\nWhen the right leg is bent, the stance is called a right walking stance, and vice versa.\\n\\nIt can be performed either full-facing or half-facing, both in attack and defense.",
+          "fi": "Tämä on kävelyasento, jota käytetään etenemiseen ja perustekniikoihin."
+        },
+        "resources": {
+          "images": ["walkingstance_", "walkingstance"]
+        }
+      },
+      "lstance": {
+        "title": {
+          "en": "L-Stance — Niunja Sogi",
+          "fi": "L-asento"
+        },
+        "description": {
+          "en": "This stance is widely used for defense, though it can also be used for attack.\\n\\nThe front foot is readily available for kicking with only a slight shift of body weight, while the half-facing position and body shifting provide additional advantages.\\n\\nMove one foot either to the front or rear to a distance of approximately one and a half shoulder widths, measured from the footsword of the rear foot to the toes of the front foot, forming almost a right angle.\\n\\nIt is recommended that the toes of both feet point about 15 degrees inward, placing the front heel about 2.5 centimeters beyond the heel of the rear foot for better stability.\\n\\nBend the rear leg until the kneecap forms a vertical line with the toes, while bending the front leg proportionally.\\n\\nKeep the hip aligned with the inner knee joint.\\n\\nThe body weight distribution is approximately 70 percent on the rear leg and 30 percent on the front leg.\\n\\nWhen the right leg is bent, it is called a right L-stance, and vice versa.\\n\\nIt is always performed in a half-facing position, both in attack and defense.",
+          "fi": "Tämä on L-muotoinen asento, jota käytetään puolustustekniikoissa ja nopeassa liikkumisessa."
+        },
+        "resources": {
+          "images": ["lstance_", "lstance"]
+        }
+      },
+      "sittingstance": {
+        "title": {
+          "en": "Sitting Stance — Annun Sogi",
+          "fi": "Istuma-asento"
+        },
+        "description": {
+          "en": "This is a very stable stance for lateral movement.\\n\\nIt is also widely used for punching practice and for developing the leg muscles.\\n\\nOne of the advantages of this stance is the ability to shift into a walking stance without relocating the feet.\\n\\nSpread the feet to the sides until the distance between the big toes is approximately one and a half shoulder widths.\\n\\nPoint the toes forward and distribute the body weight evenly on both legs.\\n\\nExtend the knees outward, bending until the kneecaps come over the balls of the feet.\\n\\nApply strength to the inner thighs and create inward tension by scraping the ground with the side soles of the feet.\\n\\nPush the chest and abdomen outward while pulling the hips back, tightening the abdomen.\\n\\nA stance wider than double shoulder width weakens stability and hampers speedy movement.\\n\\nIt can be performed either full-facing or side-facing, both in attack and defense.",
+          "fi": "Tämä on istuma-asento, jota käytetään sivuttaisen vakauden ja voimakkaiden tekniikoiden tukena."
+        },
+        "resources": {
+          "images": ["sittingstance_", "sittingstance"]
+        }
+      },
+      "closestance": {
+        "title": {
+          "en": "Close Stance — Moa Sogi",
+          "fi": "Suljettu Asento"
+        },
+        "description": {
+          "en": "Stand with the feet together. It can be either full facing or side facing",
+          "fi": "Tämä on suljettu asento, jossa jalat ovat yhdessä tasapainon ja valmiuden säilyttämiseksi."
+        },
+        "resources": {
+          "images": ["closestance_", "closestance"]
+        }
+      },
+      "fixedstance": {
+        "title": {
+          "en": "Fixed Stance — Gojung Sogi",
+          "fi": "Kiinteä asento"
+        },
+        "description": {
+          "en": "It is an effective stance for attack and defense to the side.\\n\\nThis stance is similar to the L-stance, with the following exceptions:\\n\\nThe body weight is distributed evenly on both legs.\\n\\nThe distance between the big toes is about one and a half shoulder widths.\\n\\nWhen the right foot is advanced, the stance is called a right fixed stance, and vice versa.\\n\\nIt is always performed in a half-facing position, both in attack and defense.",
+          "fi": "Tämä on kiinteä asento, joka tarjoaa vahvan vakauden torjuntoihin ja lyönteihin."
+        },
+        "resources": {
+          "images": ["fixedstance_", "fixedstance"]
+        }
+      },
+      "bendingreadystancea": {
+        "title": {
+          "en": "Bending Ready Stance — Guburyo Junbi Sogi",
+          "fi": "Taipuva asento"
+        },
+        "description": {
+          "en": "This stance is classified into types A and B.\\n\\nWhen standing on the right foot while executing a left forearm guarding block, it is called a right bending ready stance, and vice versa.\\n\\nType A is principally used as a preparatory position for side piercing kicks and side thrusting kicks.\\n\\nType B is used as a preparatory position for the back piercing kick.\\n\\nThe distance between the fists and the thigh should be approximately 25 centimeters.\\n\\nThe elbow should be bent at an angle of about 30 degrees.",
+          "fi": "Tämä on "
+        },
+        "resources": {
+          "images": ["bendingreadystancea_", "bendingreadystancea"]
+        }
+      },
+      "xstance": {
+        "title": {
+          "en": "X-Stance — Kyocha Sogi",
+          "fi": "X-asento"
+        },
+        "description": {
+          "en": "This is a very convenient stance, especially for attacking to the side or front during jumping movements.\\n\\nIt is frequently used for blocking and often serves as a preparatory stance for the next maneuver.\\n\\nCross one foot over or behind the other, touching the ground lightly with the ball of the foot.\\n\\nPlace the body weight on the stationary foot.\\n\\nNormally, one foot crosses in front of the other, except during jumping movements.\\n\\nWhen the body weight is on the right foot, the stance is called a right X-stance, and vice versa.\\n\\nThe non-stationary foot is usually placed in front of the stationary foot, but it can also be placed behind.\\n\\nWhen moving on the ground, the non-stationary leg is usually placed in front of the stationary leg. During jumping movements, it is usually placed behind.\\n\\nIt can be performed in a full-facing, side-facing, or half-facing position, both in attack and defense.",
+          "fi": "Tämä on X-muotoinen asento, jota käytetään siirtymissä ja erikoistekniikoissa."
+        },
+        "resources": {
+          "images": ["xstance_", "xstance"]
+        }
+      },
+      "rearfootstance": {
+        "title": {
+          "en": "Rear Foot Stance — Dwitbal Sogi",
+          "fi": "Takajalan Asento"
+        },
+        "description": {
+          "en": "This stance is used for defense and occasionally for attack.\\n\\nThe advantage of this stance is the ability to kick or adjust the distance from an opponent with the front foot, which can move spontaneously without any additional shifting of body weight to the rear foot.\\n\\nMove one foot either to the front or rear so that the distance between the small toes is approximately one shoulder width.\\n\\nBend the rear leg until the knee comes over the toes, placing the rear heel slightly beyond the heel of the front foot.\\n\\nBend the front leg lightly, touching the ground only with the ball of the foot.\\n\\nKeep the toes of the front foot pointing about 25 degrees inward and the toes of the rear foot about 15 degrees inward.\\n\\nDistribute most of the body weight on the rear foot.\\n\\nWhen the right foot is in the rear, the stance is called a right rear foot stance, and vice versa.\\n\\nIt is always performed in a half-facing position, both in attack and defense.\\n\\nBe sure to keep the knee of the rear leg pointing slightly inward.",
+          "fi": "Tämä on takajalka-asento, jossa kehon paino siirtyy enemmän takajalalle."
+        },
+        "resources": {
+          "images": ["rearfootstance_", "rearfootstance"]
+        }
+      },
+      "lowstance": {
+        "title": {
+          "en": "Low Stance — Nachuo Sogi",
+          "fi": "Matala asento"
+        },
+        "description": {
+          "en": "The advantage of this stance is the ease with which one can extend the attacking tool.\\n\\nIt also helps develop the leg muscles and is effective for adjusting the distance to and from the target.\\n\\nIt is similar to the walking stance, but longer by one foot length.\\n\\nIt can be performed either full-facing or half-facing.",
+          "fi": "Tämä on matala asento, jota käytetään jalkojen vahvistamiseen ja vakaan perustan säilyttämiseen."
+        },
+        "resources": {
+          "images": ["lowstance_", "lowstance"]
+        }
+      }
+    }
+  },
+
+
+
+
+
+  "patterns": {
+    "section": "compendium",
+    "title": {
+      "en": "Patterns",
+      "fi": "Liikesarjat"
+    },
+    "entries": {
+      "chonji": {
+        "title": {
+          "en": "Chon-Ji",
+          "fi": "Chon-Ji"
+        },
+        "description": {
+          "en": "Means literally “Heaven and Earth.” In the Orient, it is interpreted as the creation of the world or the beginning of human history, and is therefore the first pattern performed by a beginner.\\n\\nThis pattern consists of two similar parts: one representing Heaven and the other Earth. It is practiced by 9th gup holders and above.\\n\\nThe diagram of Chon-Ji is a cross that points almost evenly in four directions, and symbolically to five, because in Asian philosophy the center is considered one of the directions. It represents the widely used theory of the five elements, a concept found in many philosophical traditions throughout the Orient.\\n\\nAccording to this theory, the five basic elements that make up the world are water, fire, wood, metal, and earth. Each element is associated with a direction—north, south, east, west, and center—and connects to other aspects such as organs, seasons, and planets, depending on the discipline in which the theory is applied, such as Chinese medicine or Taichi.\\n\\nIn Korea, each direction is also associated with a particular color and an animal representing protective gods: the black turtle, red phoenix, blue dragon, white tiger, and golden dragon.\\n\\nIn Chon-Ji, the pattern begins in the center of the diagram because the center is connected to the earth, symbolizing creation itself.",
+          "fi": "Chon-Ji tarkoittaa 'Taivasta ja Maata' ja symboloi maailman luomista tai ihmiskunnan historian alkua. Se on ensimmäinen Taekwon-Do:ssa opittava liikesarja."
+        },
+        "resources": {
+          "images": ["chonji_"]
+        }
+      },
+      "dangun": {
+        "title": {
+          "en": "Dan-Gun",
+          "fi": "Dan-Gun"
+        },
+        "description": {
+          "en": "Named after the holy Dan-Gun, the legendary founder of Korea in the year 2333 BC. This pattern is practiced by 8th gup holders and above.\\n\\nDangun Wanggeom was the legendary founder of Gojoseon, the first kingdom of Korea, in present-day Liaoning, Manchuria, and the Korean Peninsula. He is said to have founded the kingdom in 2333 BC. Although the term Dan-Gun commonly refers to the founder, some believe it was a title used by all rulers of Gojoseon, and that Wanggeom was the founder's proper name.\\n\\nDan-Gun's ancestry begins with his grandfather Hwanin, the “Lord of Heaven,” who had a son named Hwanung. Hwanung longed to live on Earth, and Hwanin permitted him and 3,000 followers to descend beneath the sandalwood tree on Paektu Mountain, where Hwanung founded Sinsi, the “City of God.” Along with his ministers of clouds, rain, and wind, he established laws and moral codes and taught humans various arts, medicine, and agriculture.\\n\\nAccording to the legend, a tiger and a bear prayed to Hwanung to become human. Hwanung gave them twenty cloves of garlic and a bundle of mugwort, ordering them to eat only this sacred food and remain hidden in a cave for one hundred days. The tiger gave up and left, but the bear endured and was transformed into a woman named Ungnyeo.\\n\\nUngnyeo, though grateful, lacked a husband and prayed beneath the Sindansu tree to be blessed with a child. Hwanung was moved by her prayers, took her as his wife, and she gave birth to Dan-Gun Wanggeom. Dan-Gun later founded Joseon, the “Country of Morning Viridity,” which ruled for almost two thousand years. At the end of his reign, he settled in Adadal City on Mount Baegal and became a mountain god at the age of 1,908.\\n\\nThe dating of Dan-Gun's rule is traditionally calculated to begin in 2333 BC, based on the Dongguk Tonggam (1485), which places it in the 50th year of the reign of the legendary Chinese Emperor Yao. Other historical records vary somewhat, but also place it during Yao's reign. Until 1961, the official South Korean era for numbering years was called Dangi, which also began in 2333 BC.\\n\\nDaejong-gyo considered October 3rd in the Korean calendar as the “Festival of the Opening of Heaven.” This day is now celebrated as National Foundation Day in the Gregorian calendar.\\n\\nIn the 1990s, North Korea claimed to have discovered and excavated parts of the Mausoleum of Dan-Gun. Scholars outside North Korea remain skeptical of both the dating methods and the extent of renovations, as independent access and testing have not been permitted.\\n\\nModern scholars often regard the Dan-Gun legend as reflecting the sun-worship and totemism common in the origin myths of Northeast Asia. The bear frequently appears in the origin myths of Manchuria and the Russian Far East, and the legend may hint at relationships among tribes that worshipped the sun, bear, and tiger.\\n\\nDuring the Mongol invasions of Korea, the Dan-Gun legend played an important role in national unity and patriotic resistance. Gosindo, a form of Korean shamanism that considered Dan-Gun a god, survived in small numbers until the 15th century.\\n\\nIn the late 19th and early 20th centuries, with the resurgence of Korean nationalism and the beginning of Japanese rule, Dan-Gun worship was revived through Daejonggyo. Promoted by Na Cheol (1864-1916), the movement could not survive Japanese repression because it conflicted with cultural assimilation policies. After Korea's liberation, Daejonggyo was revived, although it remains a minor religion.\\n\\nUnusually for a tul, all the punches in Dan-Gun are performed at high section (eye level), symbolizing Dan-Gun scaling a mountain.",
+          "fi": "Dan-Gun on nimetty Gojoseonin, Korean ensimmäisen kuningaskunnan, legendaarisen perustajan mukaan. Kuningaskunta perustettiin vuonna 2333 eaa."
+        },
+        "resources": {
+          "images": ["dangun_"]
+        }
+      },
+      "dosan": {
+        "title": {
+          "en": "Do-San",
+          "fi": "Do-San"
+        },
+        "description": {
+          "en": "The pseudonym of the patriot Ahn Chang-Ho (1878-1938). The 24 movements of the pattern represent his entire life, which he devoted to advancing the education of Korea and its independence movement. This pattern is practiced by 7th gup holders and above.\\n\\nAhn Chang-Ho, whose pen name was Do-San, was a Korean independence activist and one of the early leaders of the Korean-American immigrant community in the United States. He established the Young Korean Association in San Francisco in 1907 and was a key member in the founding of the Provisional Government of the Republic of Korea in Shanghai in 1919.\\n\\nBeyond his work for Korean independence, Do-San believed strongly in reforming the character of the Korean people and improving Korea's social system through education and moral development. He is also remembered as the father of Hollywood actor Philip Ahn.\\n\\nBorn in 1878 in Kangso, Pyeongan Province, in present-day North Korea, Ahn received a traditional oriental education at a village school. In 1896, he moved to Seoul and attended Save the World School (Gusea Hakdang), a missionary school, where he converted to Christianity over a period of four years.\\n\\nIn 1902, Ahn immigrated to San Francisco with his wife, Helen, seeking better education. During the voyage, while passing the Hawaiian Islands, he was inspired by the sight of a volcanic island rising from the sea and chose the name Do-San, meaning “island mountain.”\\n\\nWhile living in California, he witnessed two Korean merchants fighting over sales territory. Disturbed by this display of division among his countrymen, he devoted himself to reforming the Korean immigrant community. In 1903, he founded the Friendship Society, the first Korean organization in the continental United States. In 1905, he established the Mutual Assistance Society, which later merged into the Korean National Association, serving as the official representative body of Koreans in the United States until the end of World War II.\\n\\nIn 1926, Do-San left California by ship for China and never returned to the United States. Throughout his anti-Japanese activities, he was arrested and imprisoned more than five times by Japanese authorities. His first arrest came in 1909 in connection with Ahn Jung-Geun's assassination of Ito Hirobumi, the Japanese Resident General of Korea.\\n\\nHe endured repeated imprisonment, torture, and punishment, yet never gave up his dedication to Korea's freedom. In 1932, he was arrested in Shanghai in connection with Yun Bong-Gil's bombing at Hongkew Park and was taken back to Korea by Japanese police despite being a naturalized Chinese citizen. He was convicted under Japan's Preservation of Peace Laws and sentenced to five years in Taejon prison.\\n\\nMany regard Ahn Chang-Ho as one of Korea's key moral and philosophical leaders of the 20th century. During the years before and during Japanese occupation, he called for the moral and spiritual renewal of the Korean people through education as an essential part of the struggle for independence.\\n\\nIn 1938, Japanese authorities arrested Ahn once again, but due to severe illness, he was released on bail and transferred to Kyungsung University Hospital, where he died on March 10, 1938. Memorials were later built in Seoul and Riverside, California, in his honor.",
+          "fi": "Do-San on Ahn Chang-hon (1878-1938) kirjailijanimi. Hän oli korealainen patriootti ja itsenäisyysaktivisti. Liikesarjan 24 liikettä kuvaavat hänen elämäänsä koulutuksen ja Korean itsenäisyyden hyväksi."
+        },
+        "resources": {
+          "images": ["dosan_"]
+        }
+      },
+      "wonhyo": {
+        "title": {
+          "en": "Won-Hyo",
+          "fi": "Won-Hyo"
+        },
+        "description": {
+          "en": "The noted monk who introduced Buddhism to the Silla Dynasty in the year 686 A.D. This pattern is practiced by 6th gup holders and above.\\n\\nWonhyo (617-686), born in northern Kyongsang Province, was one of the leading thinkers, writers, and commentators of the Korean Buddhist tradition. Legend says he was born in a forest in Chestnut Valley under a Sal tree, a tree often associated with important figures in Buddhist legends. His real name was Sol Sedang, but he later took the name Wonhyo, a pseudonym with the same meaning.\\n\\nIn ancient Korea, it was common for people to have several names, including official names, nicknames, and pseudonyms. Artists and intellectuals often adopted pen names, while monks frequently received a new name from their masters. Wonhyo began his Buddhist life at the age of twenty, transforming his home into a temple and entering monastic life.\\n\\nAt the time, Buddhism was not widely accepted in Silla. Although it had been introduced earlier into the kingdoms of Koguryo and Baekje, the people of Silla resisted it. Only after the martyrdom of the monk Ichadona in 528, whose sacrifice became a symbol of faith, did Buddhism gain official recognition and wider acceptance in Silla.\\n\\nDuring the reign of King Pop-Hung, the study of Buddhism required knowledge of Chinese writing, which limited learning mostly to monks and nobles. Since there were few places in Silla to study Buddhism, Wonhyo and the monk Ui-Sang attempted to travel to China in 650 to continue their studies, but were forced to return after being mistaken for spies.\\n\\nA second attempt was made in 661. During this journey, Wonhyo and Ui-Sang were caught in heavy rain and took shelter in what they believed was a stone shrine. During the night, Wonhyo drank water from what he thought was a gourd. In the morning, they discovered they had been sleeping in an old tomb and that the vessel was actually a human skull filled with stagnant water. Deeply affected by this experience, Wonhyo realized the power of the human mind to transform reality and abandoned his journey to China.\\n\\nAfter this awakening, Wonhyo left the priesthood and began spreading Buddhism as a layman. At that time, Buddhism in Silla was divided into several competing sects. Wonhyo became one of the most influential figures in Korean Buddhism through his efforts to unite these sects and reconcile their differences.\\n\\nWonhyo was also one of the most prolific Buddhist writers of his era, producing more than one hundred literary works totaling around 240 volumes, although only a small portion survives today. He gained recognition among both the royal family and the common people, often being invited to lead prayers and sermons at court.\\n\\nKing Muyo was so impressed by Wonhyo that he invited him to live in the royal palace. There, Wonhyo developed a relationship with Princess Kwa, and they married and had a son, Sol-Chong. Sol-Chong later became one of the ten great Confucian scholars of the Silla era and contributed significantly to the development of the IDU writing system, which adapted Chinese characters for recording Korean language and literature.\\n\\nAfter the birth of his son, Wonhyo left palace life and traveled throughout the country. Though he had never studied in China, he was recognized even by scholars of the Tang dynasty for his wisdom. He rejected sectarian conflict and developed his own ideology to remove divisions between religious schools.\\n\\nIn 661, Wonhyo developed Chongto-Gyo (Pure Land), a form of Buddhism that emphasized simple prayer rather than scholarly study. His teaching made Buddhism accessible to ordinary people and the lower classes, and it quickly spread throughout the population.\\n\\nWonhyo devoted the rest of his life to teaching, helping the poor, and spreading Buddhist philosophy. His work contributed greatly to the cultural and national development of Silla and supported the unification of the Three Kingdoms of Korea.\\n\\nWonhyo was also known for singing and dancing in the streets as a way of reaching ordinary people, despite such behavior being forbidden by traditional Buddhist practice. He died in 686 and was buried by his son Sol-Chong at Punhwang Temple.\\n\\nWonhyo's influence had a profound impact on Korean Buddhism and culture, and his teachings spread beyond Korea into China and Japan.",
+          "fi": "Won-Hyo oli tunnettu munkki, joka toi buddhalaisuuden Silla-dynastiaan vuonna 686 jaa."
+        },
+        "resources": {
+          "images": ["wonhyo_"]
+        }
+      },
+      "yulgok": {
+        "title": {
+          "en": "Yul-Gok",
+          "fi": "Yul-Gok"
+        },
+        "description": {
+          "en": "The pseudonym of the great philosopher and scholar Yi I (1536-1584), often called the “Confucius of Korea.” The 38 movements of this pattern refer to his birthplace on the 38th degree of latitude, and the diagram represents “scholar.” This pattern is practiced by 5th gup holders and above.\\n\\nYi I was born in Gangneung, Gangwon Province, in 1537. His father served as a Fourth State Councillor, and his mother, Shin Saimdang, was a renowned artist and calligraphist. He was also the grand-nephew of Yi Gi, who served as Prime Minister from 1549 to 1551.\\n\\nFrom an early age, Yi I studied under Baik In-geol, a successor of Jo Gwang-jo. It is said that by the age of seven he had already completed his studies of the Confucian classics, and by thirteen he passed the Civil Service literary examination.\\n\\nAt the age of sixteen, after the death of his mother, Yi I secluded himself in Kumgang-san for three years, where he studied Buddhism. At twenty, he left the mountains and devoted himself fully to the study of Confucianism.\\n\\nHe married at twenty-two and soon visited the scholar Yi Hwang at Dosan. Yi I later passed special state examinations with highest honors, presenting a thesis titled Cheondochaek (“Book on the Way of Heaven”), which was widely regarded as a literary masterpiece and demonstrated his deep knowledge of history, Confucian political philosophy, and Taoism.\\n\\nYi I achieved top honors in civil examinations nine consecutive times. After his father's death at twenty-six, he entered government service and held various official positions from the age of twenty-nine. In 1568, he visited the Ming Dynasty as a document officer and participated in the writing of the Myeongjong Annals.\\n\\nAt the age of thirty-four, he authored Dongho Mundap, an eleven-article political memorial in which he argued that righteous government could be achieved through proper moral leadership and sound political principles.\\n\\nThrough years of experience in government, Yi I developed a broad political vision and gained the king's deep trust, becoming one of the most influential political figures in Korea by the age of forty. He submitted many documents and political writings to the royal court, but as political conflicts intensified in 1576, his reform efforts became ineffective and he returned home.\\n\\nDuring his retirement, Yi I devoted himself to study, teaching his disciples, and writing several important books. He later returned to office at the age of forty-five and held various ministerial positions, continuing to produce influential writings and attempting to ease the political conflicts of the time.\\n\\nHowever, King Seonjo remained indecisive, making it increasingly difficult for Yi I to maintain neutrality in the growing factional disputes. He left office in 1583 and died the following year.\\n\\nAccording to legend, Yi I built a pavilion near the Imjin River and instructed his descendants to set it on fire if the king ever had to flee north from Seoul, so that it would serve as a guiding beacon. This is said to have happened during Hideyoshi's invasions of Korea in the Imjin War.\\n\\nToday, a portrait of Yul-Gok appears on South Korean banknotes, alongside the legacy of his mother, Shin Saimdang, who is also honored on Korean currency.",
+          "fi": "Yul-Gok on Yi In (1536-1584) kirjailijanimi. Hän oli konfutselainen oppinut ja filosofi, jota kutsutaan Korean Konfutseksi. Liikesarjan 38 liikettä viittaavat hänen syntymäpaikkaansa 38. leveyspiirillä."
+        },
+        "resources": {
+          "images": ["yulgok_"]
+        }
+      },
+      "joonggun": {
+        "title": {
+          "en": "Joong-Gun",
+          "fi": "Joong-Gun"
+        },
+        "description": {
+          "en": "Named after the patriot Ahn Joong-Gun, who assassinated Hirobumi Ito, the first Japanese Governor-General of Korea and one of the leading figures behind the Korea-Japan merger. The 32 movements of this pattern represent Ahn's age at the time of his execution in Lui-Shung Prison in 1910. This pattern is practiced by 4th gup holders and above.\\n\\nAhn Joong-Geun was born on September 2, 1879, in Haeju, Hwanghae Province, as the eldest son of Ahn Tae-Hun and Baek Cheon-Jo. As a boy, he studied Chinese literature and Western sciences, but his strongest interests were martial arts and marksmanship. Kim Gu, who later became one of the leaders of the Korean independence movement, described the young Ahn as an excellent marksman, an avid reader, and a man of strong charisma.\\n\\nAt the age of sixteen, Ahn entered the Catholic Church with his father, receiving the baptismal name Thomas and learning French. During his life as a fugitive from Japanese authorities, he took refuge with a French priest, Wilhelm, who hid him and strengthened his Catholic faith through Bible study and discussion. Ahn remained devoted to Catholicism throughout his life.\\n\\nAt twenty-five, Ahn began a coal business, but after the Eulsa Treaty he turned his efforts toward educating the Korean people, establishing private schools in northwestern Korea. In 1907, he exiled himself to Vladivostok and joined the armed resistance against Japanese colonial rule. Rising to the rank of lieutenant general in a Korean resistance force, he led several attacks against Japanese troops.\\n\\nIn October 1909, Ahn carried out the act for which he became most famous. At Harbin Railway Station, he approached Hirobumi Ito, who had just returned from negotiations with Russian representatives, and shot him three times with an FN M1900 pistol. During the attack, Ahn also wounded several Japanese officials nearby.\\n\\nAfter the shooting, Ahn shouted for Korean independence in Russian and waved the Korean flag. He was arrested by Russian guards and later handed over to Japanese colonial authorities. Upon learning of Ito's death, Ahn made the sign of the cross and declared that he had willingly committed a serious act for the sake of his country, believing it to be the duty of a patriot.\\n\\nDuring his trial, Ahn insisted that he be treated as a prisoner of war as a lieutenant general of the Korean resistance army rather than as a criminal. He justified his actions by listing fifteen crimes committed by Ito Hirobumi, including the assassination of Empress Myeongseong, the dethronement of Emperor Gojong, the imposition of unequal treaties, the suppression of Korean education, and the destruction of Korean sovereignty.\\n\\nAhn argued that Ito had disrupted peace in East Asia and damaged the relationship between Korea and Japan. He believed that true peace could only exist if both nations lived as equals and respected each other.\\n\\nDespite being his captors, several Japanese officials reportedly showed sympathy and respect toward him. The public prosecutor is said to have called him a righteous man of East Asia, and his calligraphy was admired by many.\\n\\nAfter six trials, Ahn was sentenced to death by the Japanese colonial court in Ryojun (Port Arthur). Though he had hoped to be executed as a prisoner of war by firing squad, the authorities ordered that he be hanged as a common criminal.\\n\\nBefore his execution, his mother sent him a final message encouraging him not to beg for his life, reminding him that his death was for his country and for justice. Ahn accepted his fate with courage and dignity.\\n\\nHe was executed on March 26, 1910, in Ryojun. Before his death, he asked to complete his unfinished essay, “On Peace in East Asia,” and requested to wear traditional white Korean silk clothing. His grave in Lu Shun has never been found.",
+          "fi": "Joong-Gun on nimetty Ahn Choong-Gunin mukaan, joka oli korealainen patriootti ja surmasi Hirobumi Iton, Korean ensimmäisen japanilaisen kenraalikuvernöörin. Liikesarjan 32 liikettä kuvaavat hänen ikäänsä teloitushetkellä vuonna 1910."
+        },
+        "resources": {
+          "images": ["joonggun_"]
+        }
+      }
+    }
+  },
+
+
+
+  "history": {
+    "section": "compendium",
+    "title": {
+      "en": "History",
+      "fi": "Historia"
+    },
+    "entries": {
+      "TKD": {
+        "title": {
+          "en": "TKD (TODO)",
+          "fi": "TKD"
+        },
+        "description": {
+          "en": "Name Taekwon-Do given in 11.4.1955.\\n\\nThis article is still a stub. You can try to press the update button behind the three dots to see if it has since been updated.",
+          "fi": ""
+        }
+      },
+      "ITF": {
+        "title": {
+          "en": "ITF (TODO)",
+          "fi": "ITF"
+        },
+        "description": {
+          "en": "Internation Taekwon-Do Federation (ITF) founded in 22.3.1966.\\n\\nThis article is still a stub. You can try to press the update button behind the three dots to see if it has since been updated.",
+          "fi": ""
+        }
+      }
+    }
+  },
+
+  "about": {
+    "section": "compendium",
+    "title": {
+      "en": "About",
+      "fi": "Lisätietoja"
+    },
+    "entries": {
+      "About": {
+        "title": {
+          "en": "About",
+          "fi": "Lisätietoja"
+        },
+        "description": {
+          "en": "This app is still in development.\\n\\nCurrently all the videos listed are clips extracted from the YouTube channel of Donato Nardizzi:\\n\\nhttps://www.youtube.com/@DonatoNardizzi\\n\\n",
+          "fi": "Lisätietoja"
+        },
+        "resources": {
+          "images": []
+        }
+      }
+    }
+  },
+
+
+
+
+
 
   "patternvideodetails": {
     "chonji": {
@@ -1324,10 +1769,10 @@
         "Ready Posture: Close Ready Stance A facing towards D.",
         "Move the left foot to B forming a right L-stance toward B while executing a twin forearm block. (Niunja so sang palmok makgi)",
         "Execute a high inward strike to B with the right knife-hand while bringing the left side fist in front of the right shoulder, maintaining a right L-stance toward B. (Niunja so sonkal nopunde anuro taerigi)",
-        "Execute a middle punch to B with the left fist while forming a left fixed stance toward B, slipping the left foot to B. (Gojung so kaunde yop jirugi)",
+        "Execute a middle punch to B with the left fist while forming a left fixed stance toward B, slipping the left foot to B. (Gojung so kaunde baro jirugi)",
         "Bring the left foot to the right foot and then move the right foot to A, forming a left L-stance toward A while executing a twin forearm block. (Niunja so sang palmok makgi)",
         "Execute a high inward strike to A with the left knife-hand while bringing the right side fist in front of the left shoulder, maintaining a left L-stance toward A. (Niunja so sonkal nopunde anuro taerigi)",
-        "Execute a middle punch to A with the right fist while forming a right fixed stance toward A, slipping the right foot to A. (Gojung so kaunde yop jirugi)",
+        "Execute a middle punch to A with the right fist while forming a right fixed stance toward A, slipping the right foot to A. (Gojung so kaunde baro jirugi)",
         "Bring the right foot to the left foot and then turn the face toward D while forming a right bending ready stance A toward D. (Guburyo junbi sogi A)",
         "Execute a middle side piercing kick to D with the left foot. (Kaunde yopcha jirugi)",
         "Lower the left foot to D forming a right L-stance toward D while executing a middle guarding block to D with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
@@ -1336,10 +1781,10 @@
         "Move the right foot to D forming a right walking stance toward D while executing a middle thrust to D with the right straight fingertip. (Gunnun so sun sonkut kaunde tulgi)",
         "Move the left foot to E turning counter clockwise to form a right L-stance toward E, at the same time executing a twin forearm block. (Niunja so sang palmok makgi)",
         "Execute a high inward strike to E with the right knife-hand while bringing the left side fist in front of the right shoulder, maintaining a right L-stance toward E. (Niunja so sonkal nopunde anuro taerigi)",
-        "Execute a middle punch to E with the left fist while forming a left fixed stance toward E, slipping the left foot to E. (Gojung so kaunde yop jirugi)",
+        "Execute a middle punch to E with the left fist while forming a left fixed stance toward E, slipping the left foot to E. (Gojung so kaunde baro jirugi)",
         "Bring the left foot to the right foot and then move the right foot to F, forming a left L-stance toward F while executing a twin forearm block. (Niunja so sang palmok makgi)",
         "Execute a high inward strike to F with the left knife-hand while bringing the right side fist in front of the left shoulder, maintaining a left L-stance toward F. (Niunja so sonkal nopunde anuro taerigi)",
-        "Execute a middle punch to F with the right fist while forming a right fixed stance toward F, slipping the right foot to F. (Gojung so kaunde yop jirugi)",
+        "Execute a middle punch to F with the right fist while forming a right fixed stance toward F, slipping the right foot to F. (Gojung so kaunde baro jirugi)",
         "Bring the right foot to the left foot and then move the left foot to C forming a left walking stance toward C while executing a circular block to CF with the right inner forearm. (Gunnun so anpalmok dollimyo makgi)",
         "Execute a low front snap kick to C with the right foot, keeping the position of the hands as they were in 19. (Najunde apcha busigi)",
         "Lower the right foot to C forming a right walking stance toward C while executing a middle punch to C with the left fist. (Gunnun so kaunde bandae jirugi)",
@@ -1478,6 +1923,116 @@
         "Jump to C forming a left X-stance toward B while executing a high side strike to C with the left back fist. (Twigi, wen kyocha so dung joomuk nopunde yop taerigi)",
         "Move the right foot to A forming a right walking stance toward A at the same time executing a high block to A with the right double forearm. (Gunnun so doo palmok nopunde makgi)",
         "Bring the right foot to the left foot and then move the left foot to B forming a left walking stance toward B while executing a high block to B with the left double forearm. (Gunnun so doo palmok nopunde makgi)",
+        "END: Bring the left foot back to a ready posture."
+      ]
+    },
+    "joonggun": {
+      "timecodesMs": [
+        0,
+        0,
+        1400,
+        2801,
+        4367,
+        6133,
+        7300,
+        8834,
+        10467,
+        12067,
+        13601,
+        15067,
+        16801,
+        18467,
+        20534,
+        22367,
+        23367,
+        24367,
+        26334,
+        27334,
+        28434,
+        30601,
+        32234,
+        33601,
+        35100,
+        36868,
+        38267,
+        39834,
+        44000,
+        45400,
+        49634,
+        53400,
+        54901,
+        57801
+      ],
+      "short": [
+        "start",
+        "sonkal dung",
+        "yop apcha busigi",
+        "sonbadak ollyo makgi",
+        "sonkal dung",
+        "yop apcha busigi",
+        "sonbadak ollyo makgi",
+        "sonkal daebi makgi",
+        "palkup taerigi",
+        "sonkal daebi makgi",
+        "palkup taerigi",
+        "sewo jirugi",
+        "dwijibo jirugi",
+        "kyocha joomuk",
+        "dung joomuk taerigi",
+        "jappyosul tae",
+        "bandae jirugi",
+        "dung joomuk taerigi",
+        "jappyosul tae",
+        "bandae jirugi",
+        "doo palmok makgi",
+        "niunja bandae jirugi",
+        "yopcha jirugi",
+        "doo palmok makgi",
+        "niunja bandae jirugi",
+        "yopcha jirugi",
+        "palmok daebi makgi",
+        "noollo makgi",
+        "palmok daebi makgi",
+        "noollo makgi",
+        "giokja jirugi",
+        "digutja makgi",
+        "digutja makgi",
+        "end"
+      ],
+      "full": [
+        "Ready Posture: Close Ready Stance B facing towards D.",
+        "Move the left foot to B forming a right L-stance toward B while executing a middle block to B with the left reverse knife-hand. (Niunja so sonkal dung kaunde makgi)",
+        "Execute a low side front snap kick to B with the left foot, keeping the position of the hands as they were in 1. (Najunde yop apcha busigi)",
+        "Lower the left foot to B and then move the right foot to B forming a left rear foot stance toward B while executing an upward block with a right palm. (Dwitbal so sonbadak bandae ollyo makgi)",
+        "Move the right foot to A forming a left L-stance toward A, at the same time executing a middle block to A with a right reverse knife-hand. (Niunja so sonkal dung kaunde makgi)",
+        "Execute a low side front snap kick to A with the right foot, keeping the position of the hands as they were in 4. (Najunde yop apcha busigi)",
+        "Lower the right foot to A and then move the left foot to A forming a right rear foot stance toward A while executing an upward block with a left palm. (Dwitbal so sonbadak bandae ollyo makgi)",
+        "Move the left foot to D forming a right L-stance toward D while executing a middle guarding block to D with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Execute a right upper elbow strike while forming a left walking stance toward D, slipping the left foot to D. (Gunnun so wi palkup bandae taerigi)",
+        "Move the right foot to D forming a left L-stance toward D while executing a middle guarding block to D with a knife-hand. (Niunja so sonkal kaunde daebi makgi)",
+        "Execute a left upper elbow strike while forming a right walking stance toward D, slipping the right foot to D. (Gunnun so wi palkup bandae taerigi)",
+        "Move the left foot to D forming a left walking stance toward D while executing a high vertical punch to D with a twin fist. (Gunnun so sang joomuk nopunde sewo jirugi)",
+        "Move the right foot to D forming a right walking stance toward D while executing an upset punch to D with a twin fist. (Gunnun so sang joomuk dwijibo jirugi)",
+        "Move the right foot on line CD and then turn counter clockwise to form a left walking stance toward C while executing a rising block with an X-fist. (Gunnun so kyocha joomuk chookyo makgi)",
+        "Move the left foot to E forming a right L-stance toward E while executing a high side strike to E with the left back fist. (Niunja so dung joomuk nopunde yop taerigi)",
+        "Twist the left fist counter clockwise until the back fist faces downward and yank the fist downward performing a releasing motion, at the same time forming a left walking stance toward E, slipping the left foot to E. (Gunnun so jappyosul tae | or bituro baegi)",
+        "Execute a high punch to E with the right fist while maintaining a left walking stance toward E. (Gunnun so nopunde bandae jirugi)",
+        "Bring the left foot to the right foot and then move the right foot to F, forming a left L-stance toward F while executing a high side strike to F with a right back fist. (Niunja so dung joomuk nopunde yop taerigi)",
+        "Twist the right fist clockwise until the back fist faces downward and yank the fist downward performing a releasing motion, at the same time forming a right walking stance toward F, slipping the right foot to F. (Gunnun so jappyosul tae | or bituro baegi)",
+        "Execute a high punch to F with the left fist while maintaining a right walking stance toward F. (Gunnun so nopunde bandae jirugi)",
+        "Bring the right foot to the left foot and then move the left foot to C forming a left walking stance toward C while executing a high block to C with a left double forearm. (Gunnun so doo palmok nopunde makgi)",
+        "Execute a middle punch to C with the left fist while forming a right L-stance toward C, pulling the left foot. (Niunja so kaunde bandae jirugi)",
+        "Execute a middle side piercing kick to C with the right foot. (Kaunde yopcha jirugi)",
+        "Lower the right foot to C forming a right walking stance toward C while executing a high block to C with the right double forearm. (Gunnun so doo palmok nopunde makgi)",
+        "Execute a middle punch to C with the right fist while forming a left L-stance toward C, pulling the right foot. (Niunja so kaunde bandae jirugi)",
+        "Execute a middle side piercing kick to C with the left foot. (Kaunde yopcha jirugi)",
+        "Lower the left foot to C forming a right L-stance toward C while executing a middle guarding block to C with the forearm. (Niunja so palmok kaunde daebi makgi)",
+        "Execute a pressing block with the right palm while forming a left low stance toward C, slipping the left foot to C. (Nachuo so sonbadak bandae noollo makgi)",
+        "Move the right foot to C forming a left L-stance toward C while executing a middle guarding block to C with the forearm. (Niunja so palmok kaunde daebi makgi)",
+        "Execute a pressing block with the left palm while forming a right low stance toward C, slipping the right foot to C. (Nachuo so sonbadak bandae noollo makgi)",
+        "Bring the left foot to the right foot forming a close stance toward A while executing an angle punch with the right fist. (Moa so orun giokja jirugi)",
+        "Move the right foot to A forming a right fixed stance toward A while executing a U-shape block to A. (Gojung so digutja makgi)",
+        "Bring the right foot to the left foot and then move the left foot to B forming a left fixed stance toward B, at the same time executing a U-shape block to B. (Gojung so digutja makgi)",
         "END: Bring the left foot back to a ready posture."
       ]
     }

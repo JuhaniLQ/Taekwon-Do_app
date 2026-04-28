@@ -11,17 +11,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import fi.tkd.itfun.ui.theme.ITFunTheme
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -54,12 +56,17 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.changedToDownIgnoreConsumed
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalView
@@ -71,7 +78,9 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import fi.tkd.itfun.PrefKeys.CONTENT_READY
 import fi.tkd.itfun.PrefKeys.PRIMARY_COLOR
+import fi.tkd.itfun.data.db.CompendiumSectionEntity
 import fi.tkd.itfun.data.db.DbProvider
+import fi.tkd.itfun.data.db.downloadAllCompendiumImages
 import fi.tkd.itfun.data.db.downloadAllVideos
 import fi.tkd.itfun.ui.theme.Green
 import fi.tkd.itfun.ui.theme.Navy
@@ -108,9 +117,9 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
-        runBlocking(Dispatchers.IO) {
-            DbProvider.ensureSeeded(applicationContext)
-        }
+//        runBlocking(Dispatchers.IO) {
+//            DbProvider.ensureSeeded(applicationContext)
+//        }
 
         val themeDefaultInt = Navy.toArgb()
         runBlocking(Dispatchers.IO) {
@@ -134,15 +143,20 @@ class MainActivity : ComponentActivity() {
             var progress by remember { mutableFloatStateOf(0f) }
 
             LaunchedEffect(Unit) {
-
-                // first run only, download videos with progress
+                DbProvider.ensureSeeded(appContext)
                 if (!initialContentReady) {
-                    downloadAllVideos(appContext) {p ->
-                        progress = p
+                    downloadAllVideos(appContext) { p ->
+                        progress = p * 0.9f
                     }
+
+                    downloadAllCompendiumImages(appContext) { p ->
+                        progress = 0.9f + (p * 0.1f)
+                    }
+
                     appContext.dataStore.edit { prefs ->
                         prefs[CONTENT_READY] = true
                     }
+
                     contentReady = true
                 }
             }
@@ -156,17 +170,139 @@ class MainActivity : ComponentActivity() {
                         progress = progress
                     )
                 } else {
-                    SystemBarsSolidColor(
-                        color = if (isDarkTheme) Color.Black else Color.White,
-                        darkIcons = !isDarkTheme
-                    )
+                    var selectedStartPage by rememberSaveable { mutableStateOf<Int?>(null) }
 
-                    Box(Modifier.safeDrawingPadding()) {
-                        Surface(Modifier.fillMaxSize()) {
-                            Pager()
+
+                    if (selectedStartPage == null) {
+                        SystemBarsSolidColor(color = lightGrey, darkIcons = true)
+                        OnboardingScreen(
+                            backgroundColor = lightGrey,
+                            onOpenTechniques = { selectedStartPage = 1 },
+                            onOpenBodyParts = { selectedStartPage = 0 },
+                            onOpenCompendium = { selectedStartPage = 2 }
+                        )
+                    } else {
+                        SystemBarsSolidColor(
+                            color = if (isDarkTheme) Color.Black else Color.White,
+                            darkIcons = !isDarkTheme
+                        )
+                        Box(Modifier.safeDrawingPadding()) {
+                            Surface(Modifier.fillMaxSize()) {
+                                Pager(initialPage = selectedStartPage!!)
+                            }
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun OnboardingScreen(
+    backgroundColor: Color,
+    onOpenTechniques: () -> Unit,
+    onOpenBodyParts: () -> Unit,
+    onOpenCompendium: () -> Unit
+) {
+    var hoveredButton by remember { mutableStateOf<String?>(null) }
+
+    var boxCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
+    var techniquesBounds by remember { mutableStateOf<Rect?>(null) }
+    var bodyPartsBounds by remember { mutableStateOf<Rect?>(null) }
+    var compendiumBounds by remember { mutableStateOf<Rect?>(null) }
+
+    val infoText = when (hoveredButton) {
+        "techniques" -> "Recall techniques and patterns through videos"
+        "bodyParts" -> "Learn body parts and vital points in Korean"
+        "compendium" -> "Study Taekwon-Do theory, history, and fundamentals"
+        else -> "Choose a topic to get started"
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(backgroundColor)
+            .onGloballyPositioned { boxCoords = it }
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val event = awaitPointerEvent(PointerEventPass.Initial)
+                        val pointer = event.changes.firstOrNull()
+
+                        if (pointer == null || !pointer.pressed) {
+                            hoveredButton = null
+                            continue
+                        }
+
+                        val posInWindow =
+                            boxCoords?.localToWindow(pointer.position) ?: continue
+
+                        val newHoveredButton = when {
+                            techniquesBounds?.contains(posInWindow) == true -> "techniques"
+                            bodyPartsBounds?.contains(posInWindow) == true -> "bodyParts"
+                            compendiumBounds?.contains(posInWindow) == true -> "compendium"
+                            else -> null
+                        }
+
+                        if (hoveredButton != newHoveredButton) {
+                            hoveredButton = newHoveredButton
+                        }
+                    }
+                }
+            }
+    ) {
+        Image(
+            painter = painterResource(R.drawable.onboard_icon),
+            contentDescription = null,
+            modifier = Modifier
+                .size(290.dp)
+                .align(Alignment.Center)
+        )
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .offset(y = 200.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = infoText,
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            Spacer(Modifier.height(12.dp))
+
+            Button(
+                onClick = onOpenTechniques,
+                modifier = Modifier.width(170.dp).onGloballyPositioned {
+                    techniquesBounds = it.boundsInWindow()
+                }
+            ) {
+                Text("Techniques")
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            Button(
+                onClick = onOpenBodyParts,
+                modifier = Modifier.width(135.dp).onGloballyPositioned {
+                    bodyPartsBounds = it.boundsInWindow()
+                }
+            ) {
+                Text("Body parts")
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            Button(
+                onClick = onOpenCompendium,
+                modifier = Modifier.width(100.dp).onGloballyPositioned {
+                    compendiumBounds = it.boundsInWindow()
+                },
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text("Compendium")
             }
         }
     }
@@ -182,30 +318,44 @@ fun DownloadSplashScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(backgroundColor),
-        contentAlignment = Alignment.Center
+            .background(backgroundColor)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+
+        Box(
+            modifier = Modifier
+                .size(290.dp)
+                .align(Alignment.Center),
+            contentAlignment = Alignment.Center
         ) {
-            Box(contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(
-                    progress = progress.coerceIn(0f, 1f),
-                    modifier = Modifier.size(220.dp),
-                    strokeWidth = 6.dp
-                )
+            CircularProgressIndicator(
+                progress = progress.coerceIn(0f, 1f),
+                modifier = Modifier.size(220.dp),
+                strokeWidth = 6.dp
+            )
 
-                Image(
-                    painter = painterResource(R.drawable.onboard_icon),
-                    contentDescription = null,
-                    modifier = Modifier.size(290.dp)
-                )
+            Image(
+                painter = painterResource(R.drawable.onboard_icon),
+                contentDescription = null,
+                //modifier = Modifier.size(290.dp)
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .offset(y = 200.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+
+        ) {
+            val phaseText = when {
+                progress < 0.2f -> "Downloading white belt techniques"
+                progress < 0.4f -> "Downloading yellow belt techniques"
+                progress < 0.6f -> "Downloading green belt techniques"
+                progress < 0.9f -> "Downloading blue belt techniques"
+                else -> "Downloading compendium images"
             }
-
-            Spacer(Modifier.height(16.dp))
-
             Text(
-                text = "Downloading white belt techniques ($percent%)",
+                text = "$phaseText ($percent%)",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
@@ -233,7 +383,7 @@ fun SystemBarsSolidColor(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Pager(){
+fun Pager(initialPage: Int = 1) {
     val focusManager = LocalFocusManager.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -249,6 +399,11 @@ fun Pager(){
     val itemRows by db.itemDao().getAll()
         .collectAsState(initial = emptyList())
     val links by db.itemDao().getItemPatternNames()
+        .collectAsState(initial = emptyList())
+
+    // screen three (compendium)
+    val compendiumSections by db.compendiumSectionDao()
+        .getAll()
         .collectAsState(initial = emptyList())
 
     val catById = remember(categories) { categories.associate { it.id to it.name } }
@@ -272,6 +427,20 @@ fun Pager(){
         }
     }
 
+    val stanceItems = remember(tkdItemsRoom) {
+        tkdItemsRoom.filter { it.category == TKDItemCategory.STANCES }
+    }
+
+    val patternItems = remember(tkdItemsRoom) {
+        tkdItemsRoom.filter { it.category == TKDItemCategory.ALL_PATTERNS }
+    }
+
+    val techniqueItems = remember(tkdItemsRoom) {
+        tkdItemsRoom.filter {
+            it.category != TKDItemCategory.STANCES
+        }
+    }
+
     val bodyItems = remember(bodyPartRows) {
         bodyPartRows.mapNotNull { e ->
             val region = runCatching { BodyRegion.valueOf(e.region) }.getOrNull()
@@ -287,7 +456,7 @@ fun Pager(){
         }
     }
 
-    val pagerState = rememberPagerState ( initialPage = 1 ) { 3 }
+    val pagerState = rememberPagerState(initialPage = initialPage) { 3 }
     var isSheetOpen by rememberSaveable { mutableStateOf(false) }
     var selectedTabIndex by remember { mutableIntStateOf(pagerState.currentPage) }
 
@@ -300,6 +469,13 @@ fun Pager(){
     //Hoisted state for Body screen
     val selectedTabBody = rememberSaveable { mutableStateOf("All") }
     val selectedFiltersBody = rememberSaveable { mutableStateOf(setOf<String>()) }
+
+    //Hoisted for compendium
+    var selectedCompendiumTabKey by rememberSaveable { mutableStateOf("tenets") }
+    var selectedCompendiumEntryKey by rememberSaveable { mutableStateOf<String?>(null) }
+    val expandedEntries = remember {
+        mutableStateMapOf<String, Boolean>()
+    }
 
     //Hoisted state for update progress bar
     var statusText by remember { mutableStateOf("") }
@@ -383,14 +559,29 @@ fun Pager(){
                         bodyItems = bodyItems
                     )
                     1 -> ScreenTwo(
-                        tkdItemsRoom = tkdItemsRoom,
+                        tkdItemsRoom = techniqueItems,
                         selectedTab = selectedTab,
                         selectedPattern = selectedPattern,
                         selectedFilters = selectedFilters,
                         patternStr = patternStr,
-                        beltGup = beltGup
+                        beltGup = beltGup,
+                        onOpenCompendiumEntry = { entryKey ->
+                            selectedCompendiumTabKey = "patterns"
+                            selectedCompendiumEntryKey = entryKey
+                            selectedTabIndex = 2
+                        }
                     )
-                    2 -> ScreenThree()
+                    2 -> ScreenThree(
+                        stanceItems = stanceItems,
+                        patternItems = patternItems,
+                        compendiumSections = compendiumSections,
+                        beltGup = beltGup,
+                        selectedTabKey = selectedCompendiumTabKey,
+                        selectedEntryKey = selectedCompendiumEntryKey,
+                        onSelectedTabChange = { selectedCompendiumTabKey = it },
+                        onSelectedEntryChange = { selectedCompendiumEntryKey = it },
+                        expandedEntries = expandedEntries
+                    )
                 }
             }
             val sheetState = rememberModalBottomSheetState()
@@ -399,7 +590,10 @@ fun Pager(){
             if (isSheetOpen) {
                 ModalBottomSheet(
                     sheetState = sheetState,
-                    onDismissRequest = { isSheetOpen = false }
+                    onDismissRequest = { isSheetOpen = false },
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.surface,
+                    tonalElevation = 0.dp
                 ) {
 
                     Column(
@@ -480,7 +674,11 @@ fun Pager(){
                                         }
 
                                         downloadAllVideos(context) { p ->
-                                            progress = p
+                                            progress = p * 0.9f
+                                        }
+
+                                        downloadAllCompendiumImages(context) { p ->
+                                            progress = 0.9f + (p * 0.1f)
                                         }
                                         if (result != DbProvider.UpdateResult.NetworkError)  {
                                             statusText = "Done."
@@ -549,7 +747,9 @@ fun ScreenTwo(
               selectedPattern: MutableState<String>,
               selectedFilters: MutableState<Set<String>>,
               patternStr: String,
-              beltGup: Int) {
+              beltGup: Int,
+              onOpenCompendiumEntry: (String) -> Unit
+              ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
@@ -561,21 +761,40 @@ fun ScreenTwo(
             selectedPattern = selectedPattern,
             selectedFilters = selectedFilters,
             patternStr = patternStr,
-            beltGup = beltGup
+            beltGup = beltGup,
+            onOpenCompendiumEntry = onOpenCompendiumEntry
         )
     }
 }
 
-
 @Composable
-fun ScreenThree() {
+fun ScreenThree(
+    stanceItems: List<TKDItem>,
+    patternItems: List<TKDItem>,
+    compendiumSections: List<CompendiumSectionEntity>,
+    beltGup: Int,
+    selectedTabKey: String,
+    selectedEntryKey: String?,
+    onSelectedTabChange: (String) -> Unit,
+    onSelectedEntryChange: (String?) -> Unit,
+    expandedEntries: SnapshotStateMap<String, Boolean>
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text("Update",
-            modifier = Modifier.align(Alignment.CenterHorizontally))
+        Compendium(
+            stanceItems = stanceItems,
+            patternItems = patternItems,
+            compendiumSections = compendiumSections,
+            beltGup = beltGup,
+            selectedTabKey = selectedTabKey,
+            selectedEntryKey = selectedEntryKey,
+            onSelectedTabChange = onSelectedTabChange,
+            onSelectedEntryChange = onSelectedEntryChange,
+            expandedEntries = expandedEntries
+        )
     }
 }
 
@@ -622,26 +841,34 @@ fun BeltLevelSettings(
                 repeat(3) {
                     val level = index + 1
                     val isSelected = level <= selectedLevel
-                    val borderColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
                     val contentAlpha = if (isSelected) 1f else 0.35f
+
+                    val borderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.32f)
 
                     Box(
                         modifier = Modifier
                             .padding(horizontal = 20.dp)
                             .size(boxSize)
                             .clip(corner)
-                            .background(beltColors[index].copy(alpha = contentAlpha))
-                            .border(5.dp, borderColor, corner)
+                            .background(borderColor)
+                            .padding(1.dp)
                             .clickable { onSelectLevel(level) }
                     ) {
-                        stripeColors[index]?.let { stripe ->
-                            Box(
-                                modifier = Modifier
-                                    .align(Alignment.Center)
-                                    .fillMaxWidth()
-                                    .fillMaxHeight(0.2f) // 40/20/40 split
-                                    .background(stripe.copy(alpha = contentAlpha))
-                            )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(corner)
+                                .background(beltColors[index].copy(alpha = contentAlpha), corner)
+                        ) {
+                            stripeColors[index]?.let { stripe ->
+                                Box(
+                                    modifier = Modifier
+                                        .align(Alignment.Center)
+                                        .fillMaxWidth()
+                                        .fillMaxHeight(0.2f)
+                                        .background(stripe.copy(alpha = contentAlpha))
+                                )
+                            }
                         }
                     }
 

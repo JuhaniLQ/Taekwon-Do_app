@@ -11,9 +11,12 @@ import androidx.room.RoomDatabase
         CategoryEntity::class,
         ContentMetaEntity::class,
         BodyPartEntity::class,
-        PatternVideoDetailsEntity::class
+        PatternVideoDetailsEntity::class,
+        CompendiumSectionEntity::class,
+        CompendiumEntryEntity::class,
+        CompendiumEntryImageEntity::class
     ],
-    version = 1,   // <-- bump by 1
+    version = 2,   // <-- bump by 1
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -23,5 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun contentMetaDao(): ContentMetaDao
     abstract fun bodyPartDao(): BodyPartDao
     abstract fun patternVideoDetailsDao(): PatternVideoDetailsDao
-
+    abstract fun compendiumSectionDao(): CompendiumSectionDao
+    abstract fun compendiumEntryDao(): CompendiumEntryDao
+    abstract fun compendiumEntryImageDao(): CompendiumEntryImageDao
 }

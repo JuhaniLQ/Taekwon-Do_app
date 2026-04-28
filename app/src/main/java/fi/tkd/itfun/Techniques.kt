@@ -95,6 +95,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import kotlinx.coroutines.launch
 import androidx.compose.ui.text.style.TextAlign
+import fi.tkd.itfun.ui.theme.Blue
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.isActive
 import kotlin.math.abs
@@ -108,7 +109,8 @@ fun Techniques(
                selectedPattern: MutableState<String>,
                selectedFilters: MutableState<Set<String>>,
                patternStr: String,
-               beltGup: Int) {
+               beltGup: Int,
+               onOpenCompendiumEntry: (String) -> Unit) {
 
     val availablePatternNames by remember(tkdItemsRoom, beltGup) {
         derivedStateOf {
@@ -122,7 +124,6 @@ fun Techniques(
                 .filter { (_, requiredBelt) -> requiredBelt >= beltGup }
                 .map { (name, _) -> name }
                 .distinct()
-                .sorted()
                 .toList()
         }
     }
@@ -131,7 +132,11 @@ fun Techniques(
 
     val isSubMenuVisible = remember { mutableStateOf(false) }
 
-    val filterCategories = TKDItemCategory.entries
+    val filterCategories = listOf(
+        TKDItemCategory.KICKS,
+        TKDItemCategory.OFFENSIVE,
+        TKDItemCategory.DEFENSIVE
+    )
     val searchInput = rememberSaveable { mutableStateOf("") }      // what user types
     val searchQuery = remember { mutableStateOf("") }              // debounced version
     val listState = rememberLazyListState()
@@ -143,7 +148,6 @@ fun Techniques(
     LaunchedEffect(
         searchQuery.value,
         selectedFilters.value,
-        selectedPattern.value,
         selectedTab.value,
         beltGup) {
         listState.scrollToItem(0)
@@ -243,8 +247,6 @@ fun Techniques(
                             onClick = {
                                 selectedPattern.value = pattern
                                 isSubMenuVisible.value = false
-                                // reset filters so the user sees the full pattern list first
-                                selectedFilters.value = emptySet()
                                 selectedTab.value = patternStr
                             },
                             modifier = Modifier
@@ -269,8 +271,6 @@ fun Techniques(
         }
 
 
-
-// derive filtered list ONCE
         val currentTab = selectedTab.value
         val currentPattern = selectedPattern.value
         val activeFilters = selectedFilters.value
@@ -284,27 +284,37 @@ fun Techniques(
             beltGup
         ) {
             derivedStateOf {
-                val q = searchQuery.value.trim().lowercase()
-                tkdItemsRoom.filter { tkdItem ->
-                    val matchesTab = when (currentTab) {
-                        "All" -> true
-                        patternStr ->
-                            currentPattern.isEmpty() ||
-                                    tkdItem.pattern.contains(currentPattern)
-                        else -> true
+                fun String.normalizeForSearch(): String =
+                    replace('\u00A0', ' ')   // NBSP to normal space
+                        .trim()
+                        .lowercase()
+
+                val q = searchQuery.value.normalizeForSearch()
+
+                if (currentTab == patternStr) {
+                    tkdItemsRoom.filter { tkdItem ->
+                        tkdItem.category == TKDItemCategory.ALL_PATTERNS &&
+                                (currentPattern.isEmpty() || tkdItem.pattern.contains(currentPattern)) &&
+                                tkdItem.beltLevel >= beltGup
                     }
+                } else {
+                    tkdItemsRoom.filter { tkdItem ->
+                        val matchesTab =
+                            currentTab == "All" &&
+                                    tkdItem.category != TKDItemCategory.ALL_PATTERNS
 
-                    val matchesCategory =
-                        activeFilters.isEmpty() || activeFilters.contains(tkdItem.category.name)
+                        val matchesCategory =
+                            activeFilters.isEmpty() || activeFilters.contains(tkdItem.category.name)
 
-                    val matchesSearch =
-                        q.isEmpty() ||
-                                tkdItem.name.lowercase().contains(q) ||          // English name
-                                tkdItem.koreanName.lowercase().contains(q)       // Korean name
+                        val matchesSearch =
+                            q.isEmpty() ||
+                                    tkdItem.name.normalizeForSearch().contains(q) ||
+                                    tkdItem.koreanName.normalizeForSearch().contains(q)
 
-                    val matchesBelt = tkdItem.beltLevel >= beltGup
+                        val matchesBelt = tkdItem.beltLevel >= beltGup
 
-                    matchesTab && matchesCategory && matchesSearch && matchesBelt
+                        matchesTab && matchesCategory && matchesSearch && matchesBelt
+                    }
                 }
             }
         }
@@ -315,13 +325,18 @@ fun Techniques(
                 items = filteredItems,
                 key = { it.techniqueCode }
             ) { tkdItem ->
-                val expanded = expandedByCode[tkdItem.techniqueCode] ?: false
+                val isPattern = tkdItem.category == TKDItemCategory.ALL_PATTERNS
+                val expanded = if (isPattern) true else (expandedByCode[tkdItem.techniqueCode] ?: false)
+
                 Technique(
                     tkdItem = tkdItem,
                     expanded = expanded,
                     onExpandedChange = { newValue ->
-                        expandedByCode[tkdItem.techniqueCode] = newValue
-                    }
+                        if (!isPattern) {
+                            expandedByCode[tkdItem.techniqueCode] = newValue
+                        }
+                    },
+                    onOpenCompendiumEntry
                 )
             }
         }
@@ -336,7 +351,7 @@ fun Color.darker(percent: Float): Color {
 fun Genre(text: String, isSelected: Boolean, onClick: () -> Unit) {
     Box(
         modifier = Modifier
-            .widthIn(max = 125.dp)
+            .widthIn(max = 155.dp)
 
             .clip(RoundedCornerShape(30))
             .background(if (isSelected) MaterialTheme.colorScheme.primary.darker(30f) else MaterialTheme.colorScheme.primary)
@@ -358,27 +373,71 @@ fun Genre(text: String, isSelected: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
+fun Genrecopy(text: String, onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .widthIn(max = 155.dp)
+
+            .clip(RoundedCornerShape(30))
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.onPrimary,
+                shape = RoundedCornerShape(13.dp)
+            )
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
+    ){
+        Text(
+            modifier = Modifier
+                .padding(5.dp)
+                .clipToBounds() ,
+            text = text,
+            color = MaterialTheme.colorScheme.surface,
+            fontSize = 22.sp,
+            maxLines = 1,
+            overflow = TextOverflow.Clip
+        )
+    }
+}
+
+@Composable
 private fun Technique(
     tkdItem: TKDItem,
     expanded: Boolean,
     onExpandedChange: (Boolean) -> Unit,
+    onOpenCompendiumEntry: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val isPattern = tkdItem.category == TKDItemCategory.ALL_PATTERNS
+
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
         ),
         modifier = modifier
             .padding(vertical = 4.dp, horizontal = 8.dp)
-            .clickable { onExpandedChange(!expanded) }
+            .then(
+                if (!isPattern) {
+                    Modifier.clickable {
+                        onExpandedChange(!expanded)
+                    }
+                } else {
+                    Modifier
+                }
+            )
     ) {
-        if (tkdItem.category != TKDItemCategory.ALL_PATTERNS) {
-            CardContent(tkdItem, expanded, onExpandToggle = { onExpandedChange(!expanded) })
+        if (!isPattern) {
+            CardContent(
+                tkdItem,
+                expanded,
+                onExpandToggle = { onExpandedChange(!expanded) }
+            )
+        } else {
+            CardContent_pattern(
+                tkdItem,
+                onOpenCompendiumEntry
+            )
         }
-        else {
-            CardContent_pattern(tkdItem, expanded, onExpandToggle = { onExpandedChange(!expanded) })
-        }
-
     }
 }
 
@@ -530,10 +589,9 @@ private fun CardContent(
                 shadowElevation = 1.dp,
                 modifier = Modifier.padding(1.dp)
             ) {
-                val hasVideo = remember(tkdItem.localVideoPath) {
+                val hasVideo =
                     !tkdItem.localVideoPath.isNullOrBlank() &&
                             File(tkdItem.localVideoPath).exists()
-                }
 
                 if (!hasVideo) {
                     Image(
@@ -560,10 +618,8 @@ private fun CardContent(
 @Composable
 private fun CardContent_pattern(
     tkdItem: TKDItem,
-    expanded: Boolean,
-    onExpandToggle: () -> Unit
+    onOpenCompendiumEntry: (String) -> Unit
 ) {
-    val showVideoControls = remember { mutableStateOf(false) }
     Column {
         Row(
             modifier = Modifier
@@ -586,8 +642,7 @@ private fun CardContent_pattern(
 
             Spacer(modifier = Modifier.width(8.dp))
             Column(
-                modifier = Modifier
-                    .weight(1f)
+                modifier = Modifier.weight(1f)
             ) {
                 Text(text = tkdItem.name, color = MaterialTheme.colorScheme.surface)
                 Text(
@@ -600,15 +655,14 @@ private fun CardContent_pattern(
                 )
             }
             Box(
-                modifier = Modifier
-                    .size(48.dp)
+                modifier = Modifier.align(Alignment.CenterVertically)
+                    //.size(48.dp)
             ) {
-                Icon(
-                    painter = painterResource(
-                        if (expanded) R.drawable.expand_less else R.drawable.expand_more
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier.align(Alignment.Center)
+                Genrecopy(
+                    text = "Info",
+                    onClick = {
+                        onOpenCompendiumEntry(tkdItem.videoKey)
+                    }
                 )
             }
         }
@@ -624,47 +678,42 @@ private fun CardContent_pattern(
         var segmentEndMs by remember(tkdItem.videoKey) { mutableStateOf<Long?>(null) }
         var currentIndex by remember { mutableIntStateOf(0) }
         var playTrigger by remember { mutableIntStateOf(0) }
+        val hasVideo = !tkdItem.localVideoPath.isNullOrBlank() &&
+                File(tkdItem.localVideoPath).exists()
+        val showVideoControls = hasVideo
+        Surface(
+            shape = MaterialTheme.shapes.medium,
+            shadowElevation = 1.dp,
+            modifier = Modifier.padding(1.dp)
+        ) {
 
-        if (expanded) {
-            Surface(
-                shape = MaterialTheme.shapes.medium,
-                shadowElevation = 1.dp,
-                modifier = Modifier.padding(1.dp)
-            ) {
-                val hasVideo = remember(tkdItem.localVideoPath) {
-                    !tkdItem.localVideoPath.isNullOrBlank() &&
-                            File(tkdItem.localVideoPath).exists()
-                }
-
-                if (!hasVideo) {
-                    showVideoControls.value = false
-                    Image(
-                        painter = painterResource(id = R.drawable.tf),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .aspectRatio(16f / 9f),
-                        contentScale = ContentScale.Fit
-                    )
-                } else {
-                    showVideoControls.value = true
-                    TechniqueVideoSegment(
-                        localVideoPath = tkdItem.localVideoPath!!,
-                        segmentStartMs = segmentStartMs,
-                        segmentEndMs = segmentEndMs,
-                        playTrigger = playTrigger,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
+            if (!hasVideo) {
+                Image(
+                    painter = painterResource(id = R.drawable.tf),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(16f / 9f),
+                    contentScale = ContentScale.Fit
+                )
+            } else {
+                TechniqueVideoSegment(
+                    localVideoPath = tkdItem.localVideoPath!!,
+                    segmentStartMs = segmentStartMs,
+                    segmentEndMs = segmentEndMs,
+                    playTrigger = playTrigger,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
 
-        if (expanded && showVideoControls.value) {
-            LaunchedEffect(expanded, showVideoControls.value, tkdItem.videoKey) {
-                withContext(Dispatchers.IO) {
-                    patternDetails = db.patternVideoDetailsDao()
-                        .getByVideoKey(tkdItem.videoKey)
+
+        if (showVideoControls) {
+            LaunchedEffect(showVideoControls, tkdItem.videoKey) {
+                val details = withContext(Dispatchers.IO) {
+                    db.patternVideoDetailsDao().getByVideoKey(tkdItem.videoKey)
                 }
+                patternDetails = details
             }
 
             patternDetails?.let { details ->
@@ -790,9 +839,10 @@ fun TechniqueVideoSegment(
     modifier: Modifier = Modifier
     ) {
     val context = LocalContext.current
+    val appContext = context.applicationContext
 
     val exoPlayer = remember(localVideoPath) {
-        ExoPlayer.Builder(context).build().apply {
+        ExoPlayer.Builder(appContext).build().apply {
             val uri = Uri.fromFile(File(localVideoPath))
             setMediaItem(MediaItem.fromUri(uri))
             repeatMode = Player.REPEAT_MODE_ALL
@@ -897,7 +947,7 @@ fun SearchBar(
 
                 textStyle = LocalTextStyle.current.copy(
             fontSize = 22.sp,
-            color = MaterialTheme.colorScheme.onSurface
+            color = Blue
         ),
         modifier = modifier
             .fillMaxWidth()
@@ -918,7 +968,7 @@ fun SearchBar(
                         Text(
                             "Search",
                             fontSize = 22.sp,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f)
+                            color = Blue.copy(alpha = 0.9f)
                         )
                     }
                     innerTextField()
@@ -930,14 +980,14 @@ fun SearchBar(
                         modifier = Modifier
                             .size(28.dp)
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f))
+                            .background(Blue.copy(alpha = 0.15f))
                             .clickable { onInputChange("") },
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             "X",
                             fontSize = 18.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = Blue
                         )
                     }
                 }
@@ -952,9 +1002,10 @@ fun TechniqueVideo(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val appContext = context.applicationContext
 
     val exoPlayer = remember(localVideoPath) {
-        ExoPlayer.Builder(context).build().apply {
+        ExoPlayer.Builder(appContext).build().apply {
             val uri = Uri.fromFile(File(localVideoPath))
 
             setMediaItem(MediaItem.fromUri(uri))

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
@@ -18,25 +17,31 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import kotlin.math.abs
-import kotlin.math.max
 
 
 @Composable
@@ -46,11 +51,21 @@ fun Body(selectedTab: MutableState<String>,
 ) {
     val regions = BodyRegion.entries
 
-    Column {
+    var selectedCode by rememberSaveable { mutableStateOf<String?>(null) }
+    var rowBottomY by remember { mutableStateOf(0) }
+    var diagramBottomY by remember { mutableStateOf(0) }
+
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Row(
             modifier = Modifier
+                .onGloballyPositioned {
+                    rowBottomY = it.positionInParent().y.toInt() + it.size.height
+                }
                 .fillMaxWidth()
                 .padding(bottom = 4.dp, top = 5.dp, start = 3.dp, end = 10.dp),
+
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
@@ -69,15 +84,13 @@ fun Body(selectedTab: MutableState<String>,
                     text = vital,
                     isSelected = selectedTab.value == vital,
                     onClick = {
-                        selectedTab.value = vital          // just open submenu
+                        selectedTab.value = vital
                     }
                 )
             }
 
-
             Spacer(modifier = Modifier.weight(1f))
 
-            // filter icons
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(5.dp),
                 modifier = Modifier
@@ -99,10 +112,10 @@ fun Body(selectedTab: MutableState<String>,
                 }
             }
         }
-        val selectedWheelIndex = rememberSaveable { mutableIntStateOf(0) }
 
-        val currentTab = selectedTab.value          // "All" or "Vital"
-        val activeFilters = selectedFilters.value   // Set<String> of region names
+        val currentTab = selectedTab.value
+        val activeFilters = selectedFilters.value
+
         val filteredBodyItems by remember(
             bodyItems,
             currentTab,
@@ -126,8 +139,19 @@ fun Body(selectedTab: MutableState<String>,
                 }
             }
         }
-        val currentItem = filteredBodyItems
-            .getOrNull(selectedWheelIndex.intValue)
+
+        LaunchedEffect(filteredBodyItems) {
+            val currentStillExists = selectedCode != null &&
+                    filteredBodyItems.any { it.code == selectedCode }
+
+            when {
+                filteredBodyItems.isEmpty() -> selectedCode = null
+                currentStillExists -> Unit
+                else -> selectedCode = filteredBodyItems.first().code
+            }
+        }
+
+        val currentItem = filteredBodyItems.firstOrNull { it.code == selectedCode }
 
         val diagramResId =
             diagramImages[currentItem?.region] ?: R.drawable.questionmark
@@ -136,18 +160,35 @@ fun Body(selectedTab: MutableState<String>,
 
         DiagramWithHighlight(
             diagramResId = diagramResId,
-            bodyCode = highlightKey
+            bodyCode = highlightKey,
+            modifier = Modifier
+                .offset { IntOffset(0, rowBottomY) }
+                .onGloballyPositioned {
+                    diagramBottomY = it.positionInParent().y.toInt() + it.size.height
+                }
         )
 
-        Spacer(Modifier.height(16.dp))
-
-        WheelPicker(
-            items = filteredBodyItems,
-            modifier = Modifier.fillMaxWidth(),
-            onCenteredIndexChanged = { selectedWheelIndex.intValue = it }
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp)
+                .offset {
+                    IntOffset(
+                        x = 0,
+                        y = diagramBottomY + 16.dp.roundToPx()
+                    )
+                }
+                .requiredHeight(450.dp)
+        ) {
+            BodyWheelPicker(
+                items = filteredBodyItems,
+                selectedCode = selectedCode,
+                modifier = Modifier.fillMaxWidth(),
+                onSelectedCodeChange = { selectedCode = it }
+            )
+        }
     }
-}
+} 
 
 private val images = mapOf(
     BodyRegion.LEG to R.drawable.leg,
@@ -159,8 +200,8 @@ private val images = mapOf(
 private val diagramImages = mapOf(
     BodyRegion.LEG to R.drawable.leg_tooltips,
     BodyRegion.ARM to R.drawable.arm_tooltips,
-    BodyRegion.TORSO to R.drawable.torso,
-    BodyRegion.HEAD to R.drawable.head
+    BodyRegion.TORSO to R.drawable.torso_tooltips,
+    BodyRegion.HEAD to R.drawable.head_tooltips
 )
 
 enum class BodyRegion { HEAD, TORSO, ARM, LEG }
@@ -175,18 +216,20 @@ data class BodyItem(
 
 
 @Composable
-private fun WheelPicker(
+fun BodyWheelPicker(
     items: List<BodyItem>,
+    selectedCode: String?,
     modifier: Modifier = Modifier,
-    onCenteredIndexChanged: (Int) -> Unit
+    onSelectedCodeChange: (String?) -> Unit,
+    onReplayRequested: (String) -> Unit = {}
 ) {
     val scope = rememberCoroutineScope()
 
-    val rowHeight: Dp = 52.dp
-
+    val rowHeight = 50.dp
+    val selectionHeight = 50.dp
     val above = 2
     val below = 6
-    val visibleRows = above + 1 + below // = 7
+    val visibleRows = above + 1 + below
 
     val listState = rememberLazyListState()
     val flingBehavior = rememberSnapFlingBehavior(lazyListState = listState)
@@ -205,8 +248,8 @@ private fun WheelPicker(
             buildMap {
                 for (item in layoutInfo.visibleItemsInfo) {
                     val itemCenter = item.offset + item.size / 2
-                    val distancePx = abs(itemCenter - selectionCenter)
-                    val rowsAway = distancePx / max(item.size.toFloat(), 1f)
+                    val distancePx = kotlin.math.abs(itemCenter - selectionCenter)
+                    val rowsAway = distancePx / kotlin.math.max(item.size.toFloat(), 1f)
 
                     val scale = (1.12f - 0.12f * rowsAway).coerceIn(0.72f, 1.12f)
                     val alpha = (1.00f - 0.18f * rowsAway).coerceIn(0.25f, 1.00f)
@@ -216,27 +259,61 @@ private fun WheelPicker(
             }
         }
     }
-    val centerIndex by remember(listState, rowHeightPx, topPadPx) {
+
+    val centeredIndex by remember(listState, rowHeightPx, topPadPx) {
         derivedStateOf {
             val layoutInfo = listState.layoutInfo
-            if (layoutInfo.visibleItemsInfo.isEmpty()) return@derivedStateOf 0
+            if (layoutInfo.visibleItemsInfo.isEmpty()) return@derivedStateOf -1
 
             val selectionCenter = layoutInfo.viewportStartOffset + topPadPx + rowHeightPx / 2f
 
             layoutInfo.visibleItemsInfo.minBy { item ->
                 val itemCenter = item.offset + item.size / 2
-                abs(itemCenter - selectionCenter)
+                kotlin.math.abs(itemCenter - selectionCenter)
             }.index
         }
     }
 
-    LaunchedEffect(centerIndex) {
-        onCenteredIndexChanged(centerIndex)
+    LaunchedEffect(items) {
+        if (items.isEmpty()) return@LaunchedEffect
+
+        val targetIndex = items.indexOfFirst { it.code == selectedCode }
+            .takeIf { it >= 0 }
+            ?: 0
+
+        listState.scrollToItem(targetIndex)
     }
 
+    LaunchedEffect(centeredIndex, items, selectedCode) {
+        val newCode = items.getOrNull(centeredIndex)?.code
+        if (newCode != selectedCode) {
+            onSelectedCodeChange(newCode)
+        }
+    }
+
+    val nestedConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPostScroll(
+                consumed: Offset,
+                available: Offset,
+                source: NestedScrollSource
+            ): Offset = available
+
+            override suspend fun onPostFling(
+                consumed: Velocity,
+                available: Velocity
+            ): Velocity = available
+        }
+    }
+
+    val lineColor = MaterialTheme.colorScheme.primary
+    val lineThickness = 2.dp
+    val lineInset = 24.dp
 
     Box(
-        modifier = modifier.height(rowHeight * visibleRows)
+        modifier = modifier
+            .height(rowHeight * visibleRows)
+            .nestedScroll(nestedConnection)
     ) {
         LazyColumn(
             state = listState,
@@ -244,16 +321,26 @@ private fun WheelPicker(
             contentPadding = PaddingValues(top = topPad, bottom = bottomPad),
             modifier = Modifier.fillMaxSize()
         ) {
-            itemsIndexed(items, key = { i, _ -> i }) { index, item ->
+            items(
+                count = items.size,
+                key = { index -> items[index].code }
+            ) { index ->
+                val item = items[index]
                 val (scale, alpha) = transformsByIndex[index] ?: (0.72f to 0.25f)
 
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(rowHeight)
+                        .padding(horizontal = lineInset, vertical = 10.dp)
                         .clickable {
                             scope.launch {
-                                listState.animateScrollToItem(index)
+                                val currentCenteredCode = items.getOrNull(centeredIndex)?.code
+                                if (item.code == currentCenteredCode) {
+                                    onReplayRequested(item.code)
+                                } else {
+                                    listState.animateScrollToItem(index)
+                                }
                             }
                         },
                     contentAlignment = Alignment.Center
@@ -262,29 +349,24 @@ private fun WheelPicker(
                         text = item.nameKo,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.graphicsLayer {
                             scaleX = scale
                             scaleY = scale
                             this.alpha = alpha
                         },
-                        color = MaterialTheme.colorScheme.primary
+                        textAlign = TextAlign.Center
                     )
                 }
-
             }
         }
-
-
-        val lineColor = MaterialTheme.colorScheme.primary
-        val lineThickness = 2.dp
-        val lineInset = 24.dp
 
         Box(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = topPad)
+                .padding(top = topPad - (selectionHeight - rowHeight) / 2)
                 .fillMaxWidth()
-                .height(rowHeight)
+                .height(selectionHeight)
         ) {
             Divider(
                 modifier = Modifier
@@ -315,7 +397,7 @@ data class EllipseNorm(
 // 2) Hardcoded highlight coordinates
 private val bodyHighlights = mapOf(
     //ARM
-    "KNIFE_HAND"   to EllipseNorm(cx = 0.467f, cy = 0.183f, rx = 0.154f, ry = 0.050f),
+    "KNIFE_HAND" to EllipseNorm(cx = 0.467f, cy = 0.183f, rx = 0.154f, ry = 0.050f),
     "REVERSE_KNIFE_HAND" to EllipseNorm(cx = 0.853f, cy = 0.839f, rx = 0.145f, ry = 0.106f),
     "PALM" to EllipseNorm(cx = 0.425f, cy = 0.306f, rx = 0.075f, ry = 0.050f),
     "FINGERS" to EllipseNorm(cx = 0.600f, cy = 0.06f, rx = 0.108f, ry = 0.044f),
@@ -337,7 +419,11 @@ private val bodyHighlights = mapOf(
     "HEEL_BACK" to EllipseNorm(cx = 0.200f, cy = 0.711f, rx = 0.150f, ry = 0.067f),
     "FOOT_BLADE" to EllipseNorm(cx = 0.250f, cy = 0.867f, rx = 0.167f, ry = 0.056f),
     "HEEL_SOLE" to EllipseNorm(cx = 0.508f, cy = 0.949f, rx = 0.150f, ry = 0.049f),
-    "BALL_OF_FOOT" to EllipseNorm(cx = 0.775f, cy = 0.899f, rx = 0.154f, ry = 0.099f)
+    "BALL_OF_FOOT" to EllipseNorm(cx = 0.775f, cy = 0.899f, rx = 0.154f, ry = 0.099f),
+
+    //Torso
+    "SOLAR_PLEXUS" to EllipseNorm(cx = 0.850f, cy = 0.233f, rx = 0.125f, ry = 0.056f),
+    "TEMPLE" to EllipseNorm(cx = 0.804f, cy = 0.167f, rx = 0.087f, ry = 0.056f)
 )
 
 @Composable
