@@ -49,6 +49,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import fi.tkd.itfun.data.db.CompendiumSectionEntity
 import fi.tkd.itfun.data.db.DbProvider
 import androidx.compose.material3.Icon
@@ -89,6 +90,7 @@ fun Compendium(
 ) {
     LaunchedEffect(selectedEntryKey) {
         selectedEntryKey?.let { key ->
+            expandedEntries.clear()
             expandedEntries[key] = true
         }
     }
@@ -365,6 +367,8 @@ fun CompendiumEntryListContent(
         ) {
             entries.forEach { entry ->
                 val expanded = expandedEntries[entry.entryKey] ?: false
+                var entryHeightPx by remember(entry.entryKey) { mutableIntStateOf(0) }
+                var headerHeightPx by remember(entry.entryKey) { mutableIntStateOf(0) }
                 Box(
                     modifier = Modifier
                         .padding(top = 1.dp, bottom = 1.dp, start = 3.dp, end = 13.dp)
@@ -381,21 +385,38 @@ fun CompendiumEntryListContent(
                         )
                 ) {
                     Column(
-                        modifier = Modifier.padding(
-                            start = 4.dp,
-                            end = 2.dp
-                        )
+                        modifier = Modifier
+                            .padding(start = 4.dp, end = 2.dp)
+                            .onSizeChanged { entryHeightPx = it.height }
+                            .onGloballyPositioned { entryCoords ->
+                                val parent = contentCoords ?: return@onGloballyPositioned
+                                entryOffsets[entry.entryKey] =
+                                    parent.localPositionOf(entryCoords, Offset.Zero).y.toInt()
+                            }
                     ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .onGloballyPositioned { rowCoords ->
-                                    val parent = contentCoords ?: return@onGloballyPositioned
-                                    val y = parent.localPositionOf(rowCoords, Offset.Zero).y.toInt()
-                                    entryOffsets[entry.entryKey] = y
+                                .zIndex(1f)
+                                .offset {
+                                    val top = entryOffsets[entry.entryKey] ?: 0
+                                    val offset = if (expanded) {
+                                        (scrollState.value - top).coerceIn(
+                                            0,
+                                            (entryHeightPx - headerHeightPx).coerceAtLeast(0)
+                                        )
+                                    } else {
+                                        0
+                                    }
+                                    IntOffset(0, offset)
                                 }
+                                .onSizeChanged { headerHeightPx = it.height }
+                                .background(MaterialTheme.colorScheme.surface)
                                 .clickable {
-                                    expandedEntries[entry.entryKey] = !expanded
+                                    expandedEntries.clear()
+                                    if (!expanded) {
+                                        expandedEntries[entry.entryKey] = true
+                                    }
                                 }
                                 .padding(vertical = 8.dp),
                             verticalAlignment = Alignment.CenterVertically
@@ -496,7 +517,7 @@ fun GenreCompendium(
             .clip(RoundedCornerShape(12.dp))
             .background(
                 if (isSelected)
-                    MaterialTheme.colorScheme.primary.darker(30f)
+                    MaterialTheme.colorScheme.primary.darker()
                 else
                     MaterialTheme.colorScheme.primary
             )

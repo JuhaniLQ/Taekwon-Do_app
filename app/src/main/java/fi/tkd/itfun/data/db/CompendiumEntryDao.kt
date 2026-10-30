@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CompendiumEntryDao {
 
+    @Query("SELECT * FROM compendium_entries ORDER BY sortOrder ASC")
+    suspend fun getAllNow(): List<CompendiumEntryEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items: List<CompendiumEntryEntity>)
 

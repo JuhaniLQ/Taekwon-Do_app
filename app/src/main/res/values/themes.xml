@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.ITFun" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.ITFun" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- The splash exit listener restores these before handing off to onboarding. -->
+        <item name="android:statusBarColor">@color/light_grey</item>
+        <item name="android:navigationBarColor">@color/light_grey</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
 </resources>

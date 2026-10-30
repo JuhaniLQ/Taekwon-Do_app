@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 17,
   "bodyParts": [
     {
       "code": "KNIFE_HAND",
@@ -461,7 +461,8 @@
       "drawable":  "outerforearmhighblock",
       "category":  "DEFENSIVE",
       "patterns":  [
-        "Do-San"
+        "Do-San",
+        "Yul-Gok"
       ],
       "koreanTerms":  [
         "GUNNUN_SO",
@@ -510,6 +511,24 @@
       "videoVersion": 1
     },
     {
+      "name": "Reverse Knife-hand Middle Block",
+      "drawable": "reverseknifehandmiddleblock",
+      "category": "DEFENSIVE",
+      "patterns": [
+        "Joong-Gun"
+      ],
+      "koreanTerms": [
+        "NIUNJA_SO",
+        "KAUNDE",
+        "SONKAL",
+        "DUNG",
+        "MAKGI"
+      ],
+      "beltLevel": 4,
+      "techniqueCode": 46,
+      "videoVersion": 1
+    },
+    {
       "name":  "Twin Forearm Block",
       "drawable":  "twinforearmblock",
       "category":  "DEFENSIVE",
@@ -540,6 +559,24 @@
       ],
       "beltLevel":  5,
       "techniqueCode":  51,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Double Forearm High Block",
+      "drawable":  "doubleforearmhighblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Yul-Gok",
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "NOPUNDE",
+        "DOO_PALMOK",
+        "MAKGI"
+      ],
+      "beltLevel":  5,
+      "techniqueCode":  52,
       "videoVersion": 1
     },
     {
@@ -600,6 +637,23 @@
       "videoVersion": 1
     },
     {
+      "name": "X-fist Rising Block",
+      "drawable": "xfistrisingblock",
+      "category": "DEFENSIVE",
+      "patterns": [
+        "Joong-Gun"
+      ],
+      "koreanTerms": [
+        "GUNNUN_SO",
+        "KYOCHA_JOOMUK",
+        "CHOOKYO",
+        "MAKGI"
+      ],
+      "beltLevel": 4,
+      "techniqueCode": 61,
+      "videoVersion": 1
+    },
+    {
       "name":  "Outer Forearm High Wedging Block",
       "drawable":  "outerforearmhighwedgingblock",
       "category":  "DEFENSIVE",
@@ -650,6 +704,56 @@
       ],
       "beltLevel":  5,
       "techniqueCode":  75,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Palm Upward Block",
+      "drawable":  "palmupwardblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "DWITBAL_SO",
+        "SONBADAK",
+        "OLLYO",
+        "MAKGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  80,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Palm Pressing Block",
+      "drawable":  "palmpressingblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "NACHUA_SO",
+        "SONBADAK",
+        "NOOLLO",
+        "MAKGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  85,
+      "videoVersion": 1
+    },
+    {
+      "name":  "U-shape Block",
+      "drawable":  "ushapeblock",
+      "category":  "DEFENSIVE",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "GOJUNG_SO",
+        "DIGUTJA",
+        "MAKGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  90,
       "videoVersion": 1
     },
 
@@ -717,6 +821,24 @@
       "videoVersion": 1
     },
     {
+      "name": "High Reverse Punch",
+      "drawable": "walkingstancehighreversepunch",
+      "category": "OFFENSIVE",
+      "patterns": [
+        "Joong-Gun"
+      ],
+      "koreanTerms": [
+        "GUNNUN_SO",
+        "NOPUNDE",
+        "AP_JOOMUK",
+        "BANDAE",
+        "JIRUGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 143,
+      "videoVersion": 1
+    },
+    {
       "name":  "Middle Punch",
       "drawable":  "lstancemiddlepunch",
       "category":  "OFFENSIVE",
@@ -730,7 +852,7 @@
         "JIRUGI"
       ],
       "beltLevel":  8,
-      "techniqueCode":  143,
+      "techniqueCode":  144,
       "videoVersion": 1
     },
     {
@@ -747,7 +869,7 @@
         "JIRUGI"
       ],
       "beltLevel":  8,
-      "techniqueCode":  144,
+      "techniqueCode":  145,
       "videoVersion": 1
     },
     {
@@ -765,7 +887,7 @@
         "JIRUGI"
       ],
       "beltLevel":  7,
-      "techniqueCode":  145,
+      "techniqueCode":  146,
       "videoVersion": 1
     },
     {
@@ -787,12 +909,78 @@
       "videoVersion": 1
     },
     {
+      "name":  "Upset Punch",
+      "drawable":  "upsetpunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "AP_JOOMUK",
+        "DWIJIBO",
+        "JIRUGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  155,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Twin Fist Upset Punch",
+      "drawable":  "twinfistupsetpunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "SANG_JOOMUK",
+        "DWIJIBO",
+        "JIRUGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  156,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Twin Fist High Vertical Punch",
+      "drawable":  "twinfisthighverticalpunch",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "SANG_JOOMUK",
+        "NOPUNDE",
+        "SEWO",
+        "JIRUGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  157,
+      "videoVersion": 1
+    },
+    {
+      "name": "Angle Punch",
+      "drawable": "anglepunch",
+      "category": "OFFENSIVE",
+      "patterns": [
+        "Joong-Gun"
+      ],
+      "koreanTerms": [
+        "MOA_SO",
+        "GIOKJA",
+        "JIRUGI"
+      ],
+      "beltLevel": 4,
+      "techniqueCode": 158,
+      "videoVersion": 1
+    },
+    {
       "name":  "Knife-hand Middle Outward Strike",
       "drawable":  "knifehandmiddleoutwardstrike",
       "category":  "OFFENSIVE",
       "patterns":  [
         "Dan-Gun",
-        "Joong-Gunnnuss"
+        "Joong-Gun"
       ],
       "koreanTerms":  [
         "NIUNJA_SO",
@@ -811,7 +999,7 @@
       "category":  "OFFENSIVE",
       "patterns":  [
         "Won-Hyo",
-        "Joong-Gunnnuss"
+        "Joong-Gun"
       ],
       "koreanTerms":  [
         "NIUNJA_SO",
@@ -862,12 +1050,51 @@
       "videoVersion": 1
     },
     {
+      "name": "Backfist High Side Strike",
+      "drawable": "lstancebackfisthighsidestrike",
+      "category": "OFFENSIVE",
+      "patterns": [
+        "Joong-Gun"
+      ],
+      "koreanTerms": [
+        "NIUNJA_SO",
+        "NOPUNDE",
+        "DUNG",
+        "JOOMUK",
+        "YOP",
+        "TAERIGI"
+      ],
+      "beltLevel": 7,
+      "techniqueCode": 191,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Backfist High Side Strike",
+      "drawable":  "xtancebackfisthighsidestrike",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Yul-Gok"
+      ],
+      "koreanTerms":  [
+        "KYOCHA_SO",
+        "NOPUNDE",
+        "DUNG",
+        "JOOMUK",
+        "YOP",
+        "TAERIGI"
+      ],
+      "beltLevel":  5,
+      "techniqueCode":  192,
+      "videoVersion": 1
+    },
+    {
       "name":  "Straight Fingertip Thrust",
       "drawable":  "straightfingertipthrust",
       "category":  "OFFENSIVE",
       "patterns":  [
         "Do-San",
-        "Won-Hyo"
+        "Won-Hyo",
+        "Yul-Gok"
       ],
       "koreanTerms":  [
         "GUNNUN_SO",
@@ -885,7 +1112,7 @@
       "drawable":  "frontelbowstrike",
       "category":  "OFFENSIVE",
       "patterns":  [
-
+        "Yul-Gok"
       ],
       "koreanTerms":  [
         "GUNNUN_SO",
@@ -896,6 +1123,24 @@
       ],
       "beltLevel":  5,
       "techniqueCode":  210,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Upper Elbow Strike",
+      "drawable":  "upperelbowstrike",
+      "category":  "OFFENSIVE",
+      "patterns":  [
+        "Joong-Gun"
+      ],
+      "koreanTerms":  [
+        "GUNNUN_SO",
+        "WI",
+        "PALKUP",
+        "BANDAE",
+        "TAERIGI"
+      ],
+      "beltLevel":  4,
+      "techniqueCode":  211,
       "videoVersion": 1
     },
 
@@ -915,6 +1160,47 @@
 
 
 
+    {
+      "name":  "Front Rising Kick",
+      "drawable":  "frontrisingkick",
+      "category":  "KICKS",
+      "patterns":  [],
+      "koreanTerms":  [
+        "APCHA",
+        "OLLIGI"
+      ],
+      "beltLevel":  9,
+      "techniqueCode":  245,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Outward Downward Kick",
+      "drawable":  "outwarddownwardkick",
+      "category":  "KICKS",
+      "patterns":  [],
+      "koreanTerms":  [
+        "BAKURO",
+        "NAERYO",
+        "CHAGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  247,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Inward Downward Kick",
+      "drawable":  "inwarddownwardkick",
+      "category":  "KICKS",
+      "patterns":  [],
+      "koreanTerms":  [
+        "ANURO",
+        "NAERYO",
+        "CHAGI"
+      ],
+      "beltLevel":  8,
+      "techniqueCode":  248,
+      "videoVersion": 1
+    },
     {
       "name":  "Low Front Snap Kick",
       "drawable":  "lowfrontsnapkick",
@@ -1044,7 +1330,7 @@
         "DOLLYO",
         "CHAGI"
       ],
-      "beltLevel":  8,
+      "beltLevel":  7,
       "techniqueCode":  271,
       "videoVersion": 1
     },
@@ -1061,7 +1347,7 @@
         "DOLLYO",
         "CHAGI"
       ],
-      "beltLevel":  8,
+      "beltLevel":  7,
       "techniqueCode":  272,
       "videoVersion": 1
     },
@@ -1078,8 +1364,236 @@
         "DOLLYO",
         "CHAGI"
       ],
-      "beltLevel":  8,
+      "beltLevel":  7,
       "techniqueCode":  273,
+      "videoVersion": 1
+    },
+    {
+      "name":  "Middle Hooking Kick",
+      "drawable":  "middlehookingkick",
+      "category":  "KICKS",
+      "patterns":  [],
+      "koreanTerms":  [
+        "KAUNDE",
+        "GORO",
+        "CHAGI"
+      ],
+      "beltLevel":  7,
+      "techniqueCode":  275,
+      "videoVersion": 1
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "name": "Flying High Kick",
+      "drawable": "flyinghighkick",
+      "category": "SPECIAL",
+      "patterns": [],
+      "koreanTerms": [
+        "TWIMYO",
+        "NOPI",
+        "CHAGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 500,
+      "videoVersion": 1
+    },
+    {
+      "name": "Flying Turning Kick",
+      "drawable": "flyingturningkick",
+      "category": "SPECIAL",
+      "patterns": [],
+      "koreanTerms": [
+        "TWIMYO",
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 501,
+      "videoVersion": 1
+    },
+    {
+      "name": "Flying Reverse Turning Kick",
+      "drawable": "flyingreverseturningkick",
+      "category": "SPECIAL",
+      "patterns": [],
+      "koreanTerms": [
+        "TWIMYO",
+        "BANDAE",
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 502,
+      "videoVersion": 1
+    },
+    {
+      "name": "Flying Spinning Kick",
+      "drawable": "flyingspinningkick",
+      "category": "SPECIAL",
+      "patterns": [],
+      "koreanTerms": [
+        "TWIO",
+        "DOLMYO",
+        "CHAGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 503,
+      "videoVersion": 1
+    },
+    {
+      "name": "Flying Over Side Kick",
+      "drawable": "flyingoversidekick",
+      "category": "SPECIAL",
+      "patterns": [],
+      "koreanTerms": [
+        "TWIMYO",
+        "NOMO",
+        "YOP",
+        "CHAGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 504,
+      "videoVersion": 1
+    },
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "name": "Knife-hand Strike",
+      "drawable": "crushingknifehandstrike",
+      "category": "CRUSHING",
+      "patterns": [],
+      "koreanTerms": [
+        "SONKAL",
+        "TAERIGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 550,
+      "videoVersion": 1
+    },
+    {
+      "name": "Side Piercing Kick",
+      "drawable": "crushingsidepiercingkick",
+      "category": "CRUSHING",
+      "patterns": [],
+      "koreanTerms": [
+        "YOPCHA",
+        "JIRUGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 551,
+      "videoVersion": 1
+    },
+    {
+      "name": "Turning Kick",
+      "drawable": "crushingturningkick",
+      "category": "CRUSHING",
+      "patterns": [],
+      "koreanTerms": [
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 552,
+      "videoVersion": 1
+    },
+    {
+      "name": "Reverse Turning Kick",
+      "drawable": "crushingreverseturningkick",
+      "category": "CRUSHING",
+      "patterns": [],
+      "koreanTerms": [
+        "BANDAE",
+        "DOLLYO",
+        "CHAGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 553,
+      "videoVersion": 1
+    },
+    {
+      "name": "Forefist Punch",
+      "drawable": "crushingforefistpunch",
+      "category": "CRUSHING",
+      "patterns": [],
+      "koreanTerms": [
+        "AP",
+        "JOOMUK",
+        "JIRUGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 554,
+      "videoVersion": 1
+    },
+    {
+      "name": "Front Elbow Strike",
+      "drawable": "crushingfrontelbowstrike",
+      "category": "CRUSHING",
+      "patterns": [],
+      "koreanTerms": [
+        "AP",
+        "PALKUP",
+        "TAERIGI"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 555,
+      "videoVersion": 1
+    },
+
+
+
+
+
+
+
+
+
+    {
+      "name": "Three-step Sparring (One Direction)",
+      "drawable": "sambomatsogihanchok",
+      "category": "SPARRING",
+      "patterns": [],
+      "koreanTerms": [
+        "SAM_BO_MATSOGI",
+        "HAN_CHOK"
+      ],
+      "beltLevel": 9,
+      "techniqueCode": 600,
+      "videoVersion": 1
+    },
+    {
+      "name": "Three-step Sparring (Both Directions)",
+      "drawable": "sambomatsogiyangchok",
+      "category": "SPARRING",
+      "patterns": [],
+      "koreanTerms": [
+        "SAM_BO_MATSOGI",
+        "YANG_CHOK"
+      ],
+      "beltLevel": 8,
+      "techniqueCode": 601,
       "videoVersion": 1
     }
   ],
@@ -1100,6 +1614,9 @@
     "ANNUN_SO": "Annun So",
     "GOJUNG_SO": "Gojung So",
     "KYOCHA_SO": "Kyocha So",
+    "DWITBAL_SO": "Dwitbal So",
+    "NACHUA_SO": "Nachua So",
+    "MOA_SO": "Moa So",
 
     "GUNNUN_SOGI": "Gunnun Sogi",
     "NIUNJA_SOGI": "Niunja Sogi",
@@ -1113,11 +1630,15 @@
     "DWITBAL_SOGI": "Dwitbal Sogi",
     "NACHUA_SOGI": "Nachua Sogi",
 
+
     "BAKAT_PALMOK": "Bakat Palmok",
     "AN_PALMOK": "An Palmok",
     "SANG_PALMOK": "Sang Palmok",
+    "DOO_PALMOK": "Doo Palmok",
     "SANG_SONKAL": "Sang Sonkal",
     "MAKGI": "Makgi",
+    "NOOLLO": "Noollo",
+    "DIGUTJA": "Digutja",
     "DAEBI": "Daebi",
     "HECHYO": "Hechyo",
     "CHOOKYO": "Chookyo",
@@ -1126,8 +1647,10 @@
     "TAERIGI": "Taerigi",
     "TULGI": "Tulgi",
     "APCHA": "Apcha",
+    "OLLIGI": "Olligi",
     "BUSIGI": "Busigi",
     "CHAGI": "Chagi",
+    "GORO": "Goro",
     "YOPCHA": "Yopcha",
     "DWITCHA": "Dwitcha",
 
@@ -1135,9 +1658,15 @@
     "SONKAL": "Sonkal",
     "SONKUT": "Sonkut",
     "JOOMUK": "Joomuk",
+    "KYOCHA_JOOMUK": "Kyocha Joomuk",
+    "GIOKJA": "Giokja",
+    "SANG_JOOMUK": "Sang Joomuk",
+    "DWIJIBO": "Dwijibo",
+    "SEWO": "Sewo",
     "AP_JOOMUK": "(Ap Joomuk)",
     "DUNG": "Dung",
     "PALKUP": "Palkup",
+    "WI": "Wi",
     "SONBADAK": "Sonbadak",
 
     "YOP": "Yop",
@@ -1157,7 +1686,14 @@
     "NAERYO": "Naeryo",
     "SUN": "Sun",
     "TWIMYO": "Twimyo",
-    "GOLCHO": "Golcho"
+    "NOPI": "Nopi",
+    "TWIO": "Twio",
+    "DOLMYO": "Dolmyo",
+    "NOMO": "Nomo",
+    "GOLCHO": "Golcho",
+    "SAM_BO_MATSOGI": "Sam Bo Matsogi",
+    "HAN_CHOK": "Han Chok",
+    "YANG_CHOK": "Yang Chok"
   },
 
   "stances": {
@@ -1436,6 +1972,28 @@
       }
     }
   },
+  "updates": {
+    "section": "compendium",
+    "title": {
+      "en": "Updates",
+      "fi": "Lisäyksiä"
+    },
+    "entries": {
+      "Updates": {
+        "title": {
+          "en": "Updates",
+          "fi": "Lisäyksiä"
+        },
+        "description": {
+          "en": "Here are listed the most recent additions.\\n\\n30/10/2026: Added Sparring, Crushing and Special sections to Techniques.\\n\\nAdded more blocks, punches, strikes and kicks.\\n\\nAdded pinning: keep a technique card visible at the bottom while browsing other techniques to compare videos.\\n\\nBody diagram areas can now be tapped to select the corresponding body part.\\n\\nAdded technique and body-area counters that reflect the current filters.\\n\\nThe Korean technique names in pattern cards instructions are now highlighted.\\n\\nImproved compendium navigation: opening a subsection closes the previous one, and its title stays visible while scrolling.\\n\\nMade splash screen more seamless.\\n\\n12/05/2026: Added images for each pattern in compendium.",
+          "fi": "Lisäyksiä"
+        },
+        "resources": {
+          "images": []
+        }
+      }
+    }
+  },
 
   "about": {
     "section": "compendium",
@@ -1450,7 +2008,8 @@
           "fi": "Lisätietoja"
         },
         "description": {
-          "en": "This app is still in development.\\n\\nCurrently all the videos listed are clips extracted from the YouTube channel of Donato Nardizzi:\\n\\nhttps://www.youtube.com/@DonatoNardizzi\\n\\n",
+          "en": "This app is still in development.\\n\\nCurrently, the videos listed are clips extracted from the following YouTube channels:\\n\\nDonato Nardizzi – Patterns, sparring, blocks, attacks, and kicks:\\n\\nhttps://www.youtube.com/@DonatoNardizzi\\n\\nBrendan Doogan – Crushing and special techniques:\\n\\nhttps://www.youtube.com/@bdtkd\\n\\nAdditional miscellaneous clips are sourced from:\\n\\nNora TKD:\\n\\nhttps://www.youtube.com/@NoraTKD/videos\\n\\nNZ ITF TKD:\\n\\nhttps://www.youtube.com/@nzitftkd\\n\\nTKD Coaching:\\n\\nhttps://www.youtube.com/@Tkdcoaching\\n\\n",
+
           "fi": "Lisätietoja"
         },
         "resources": {
@@ -1459,7 +2018,6 @@
       }
     }
   },
-
 
 
 
@@ -2034,6 +2592,97 @@
         "Move the right foot to A forming a right fixed stance toward A while executing a U-shape block to A. (Gojung so digutja makgi)",
         "Bring the right foot to the left foot and then move the left foot to B forming a left fixed stance toward B, at the same time executing a U-shape block to B. (Gojung so digutja makgi)",
         "END: Bring the left foot back to a ready posture."
+      ]
+    },
+    "sambomatsogihanchok": {
+      "timecodesMs": [
+        0,
+        0,
+        4100,
+        8734,
+        10434,
+        12334,
+        13934,
+        17334,
+        25100,
+        28133,
+        29767,
+        31167,
+        32868
+
+
+
+      ],
+      "short": [
+        "narani junbi sogi",
+        "najunde makgi",
+        "kaunde baro jirugi",
+        "kaunde baro jirugi",
+        "kaunde baro jirugi",
+        "wait",
+        "narani junbi sogi",
+        "wait",
+        "an palmok makgi",
+        "an palmok makgi",
+        "an palmok makgi",
+        "kaunde bandae jirugi",
+        "narani junbi sogi"
+      ],
+      "full": [
+        "Both A and B take parallel ready stance. A begins as attacker and B as defender. A measures a suitable walking-stance distance by placing the foot outside B's foot, level with its midpoint. (Narani junbi sogi)",
+        "A steps backward into walking stance while executing a low outer forearm block and shouts for preparation (Gunnun so bakat palmok najunde makgi). B remains in parallel ready stance and responds with a shout",
+        "A: Step forward outside the opponent's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Step forward inside the opponent's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Step forward outside the opponent's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Wait in position while B completes the counterattack. B: Execute a middle reverse punch without stepping, maintaining walking stance. (Gunnun so kaunde bandae jirugi)",
+        "A steps backward into parallel ready stance, moving the foot that began the attacking sequence. (Narani junbi sogi) B steps forward into parallel ready stance. (Narani junbi sogi) The roles now reverse: B attacks and A defends.",
+        "B (now attacker): Step backward into walking stance while executing a low outer forearm block to prepare for the next three attacks. The preparation shout is used on the first occasion only. (Gunnun so bakat palmok najunde makgi) A (now defender): Remain in parallel ready stance. (Narani junbi sogi)",
+        "A: Step backward into walking stance and execute a middle inner forearm block. Begin with the same foot that began A's attacking sequence. (Gunnun so an palmok kaunde makgi) B: Step forward outside A's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi)",
+        "A: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi) B: Step forward inside A's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi)",
+        "A: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi) B: Step forward outside A's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi)",
+        "A: Execute a middle reverse punch without stepping, maintaining walking stance. (Gunnun so kaunde bandae jirugi) B: Wait in position until A completes the counterattack.",
+        "A: Step forward into parallel ready stance, moving the foot that began the defending sequence. (Narani junbi sogi) B: Step backward into parallel ready stance, moving the foot that began the attacking sequence. (Narani junbi sogi)"
+      ]
+    },
+    "sambomatsogiyangchok": {
+      "timecodesMs": [
+        0,
+        0,
+        4667,
+        6400,
+        7801,
+        9033,
+        10367,
+        12133,
+        13667,
+        15067,
+        16601
+      ],
+      "short": [
+        "narani junbi sogi",
+        "najunde makgi",
+        "kaunde baro jirugi",
+        "kaunde baro jirugi",
+        "kaunde baro jirugi",
+        "wait",
+        "kaunde baro jirugi",
+        "kaunde baro jirugi",
+        "kaunde baro jirugi",
+        "wait",
+        "narani junbi sogi"
+      ],
+      "full": [
+        "Both A and B take parallel ready stance. A is the attacker and B is the defender throughout both directions. A measures a suitable walking-stance distance by placing the foot outside B's foot, level with its midpoint. (Narani junbi sogi)",
+        "A: Step backward into walking stance while executing a low outer forearm block and shout. (Gunnun so bakat palmok najunde makgi) B: Remain in parallel ready stance and respond with a shout. (Narani junbi sogi)",
+        "A: Step forward outside B's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Step forward inside B's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Step forward outside B's foot into walking stance and execute a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step backward into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Wait in position while B completes the counterattack. B: Execute a middle reverse punch without stepping, maintaining walking stance. (Gunnun so kaunde bandae jirugi)",
+        "A: Step backward into walking stance while executing a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step forward outside A's foot into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Step backward into walking stance while executing a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step forward inside A's foot into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Step backward into walking stance while executing a middle obverse punch. (Gunnun so kaunde baro jirugi) B: Step forward outside A's foot into walking stance and execute a middle inner forearm block. (Gunnun so an palmok kaunde makgi)",
+        "A: Wait in position while B completes the counterattack. B: Execute a middle reverse punch without stepping, maintaining walking stance. (Gunnun so kaunde bandae jirugi)",
+        "A: Step forward into parallel ready stance. (Narani junbi sogi) B: Step backward into parallel ready stance. (Narani junbi sogi)"
       ]
     }
   }

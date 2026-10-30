@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.room.Room
 import androidx.room.withTransaction
 import fi.tkd.itfun.TKDItemCategory
+import fi.tkd.itfun.ContentManifestRepository
 import fi.tkd.itfun.TKDPatterns
 import fi.tkd.itfun.data.db.DbProvider.get
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ object DbProvider {
         }
     private const val TECHNIQUES_DATA_VERSION = 1
     private const val TECHNIQUES_VERSION_KEY = "techniques_version"
-    private const val JSON_MANIFEST_VERSION_KEY = "json_manifest_version"
+    internal const val JSON_MANIFEST_VERSION_KEY = "json_manifest_version"
 
 
     suspend fun ensureSeeded(context: Context) {
@@ -79,7 +80,7 @@ object DbProvider {
     suspend fun updateSeeding(context: Context): UpdateResult = withContext(Dispatchers.IO) {
         val db = get(context)
         val metaDao = db.contentMetaDao()
-        val root = loadManifestJsonNoFallback() ?: return@withContext UpdateResult.NetworkError
+        val root = loadManifestJsonNoFallback(context) ?: return@withContext UpdateResult.NetworkError
         val remoteVersion = root.optInt("version", 1)
         val current = metaDao.getValue(JSON_MANIFEST_VERSION_KEY) ?: 0
 
@@ -368,21 +369,13 @@ private suspend fun seedPatternVideoDetails(
     dao.insertAll(list)
 }
 
-private const val REMOTE_MANIFEST_URL = //please do not misuse this web address, so I can continue to offer the contents of this app
-    "https://pub-ac21b0d2bd5842ec912448a452ab1b38.r2.dev/manifest/tkd_items.json"
+internal const val REMOTE_MANIFEST_URL = //please do not misuse this web address, so I can continue to offer the contents of this app
+    "https://pub-ac21b0d2bd5842ec912448a452ab1b38.r2.dev/manifest/tkd_items1.json"
 
 private suspend fun loadManifestJson(context: Context): JSONObject =
     withContext(Dispatchers.IO) {
         runCatching {
-            val url = URL(REMOTE_MANIFEST_URL)
-            val conn = (url.openConnection() as java.net.HttpURLConnection).apply {
-                connectTimeout = 5000
-                readTimeout = 5000
-            }
-            conn.inputStream.bufferedReader().use { reader ->
-                val text = reader.readText()
-                JSONObject(text)
-            }
+            loadManifestJsonNoFallback(context) ?: error("Unable to fetch manifest")
         }.getOrElse { e ->
             Log.w("DBDEBUG", "Remote manifest fetch failed, falling back to assets", e)
             val fallbackText =
@@ -391,22 +384,10 @@ private suspend fun loadManifestJson(context: Context): JSONObject =
         }
     }
 
-suspend fun loadManifestJsonNoFallback(): JSONObject? =
-    withContext(Dispatchers.IO) {
-        runCatching {
-            val url = URL(REMOTE_MANIFEST_URL)
-            val conn = (url.openConnection() as java.net.HttpURLConnection).apply {
-                connectTimeout = 5000
-                readTimeout = 5000
-            }
-            conn.inputStream.bufferedReader().use { reader ->
-                JSONObject(reader.readText())
-            }
-        }.getOrElse { e ->
-            Log.w("DBDEBUG", "Remote manifest fetch failed", e)
-            null
-        }
-    }
+suspend fun loadManifestJsonNoFallback(context: Context): JSONObject? {
+    val result = ContentManifestRepository(context).check(force = true)
+    return result.manifest.takeUnless { result.failed }
+}
 
 private const val CDN_BASE = "https://pub-ac21b0d2bd5842ec912448a452ab1b38.r2.dev/videos"
 
