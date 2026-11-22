@@ -16,7 +16,7 @@ import androidx.room.RoomDatabase
         CompendiumEntryEntity::class,
         CompendiumEntryImageEntity::class
     ],
-    version = 2,   // <-- bump by 1
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

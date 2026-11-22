@@ -12,7 +12,8 @@ class ContentRepository(context: Context) {
     private val appContext = context.applicationContext
 
     suspend fun isContentReady(): Boolean =
-        appContext.dataStore.data.first()[CONTENT_READY] ?: false
+        (appContext.dataStore.data.first()[CONTENT_READY] ?: false) &&
+            !DbProvider.needsSeeding(appContext)
 
     suspend fun prepareContent(
         contentAlreadyReady: Boolean,

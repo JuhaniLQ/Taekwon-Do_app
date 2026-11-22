@@ -27,5 +27,6 @@ data class CompendiumEntryEntity(
     val descriptionEn: String,
     val descriptionFi: String,
 
-    val sortOrder: Int = 0
+    val sortOrder: Int = 0,
+    val termsJson: String? = null
 )

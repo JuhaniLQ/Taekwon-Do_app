@@ -36,7 +36,8 @@ fun OnboardingScreen(
     backgroundColor: Color,
     onOpenTechniques: () -> Unit,
     onOpenBodyParts: () -> Unit,
-    onOpenCompendium: () -> Unit
+    onOpenCompendium: () -> Unit,
+    onOpenQuiz: () -> Unit
 ) {
     var hoveredButton by remember { mutableStateOf<String?>(null) }
 
@@ -44,11 +45,13 @@ fun OnboardingScreen(
     var techniquesBounds by remember { mutableStateOf<Rect?>(null) }
     var bodyPartsBounds by remember { mutableStateOf<Rect?>(null) }
     var compendiumBounds by remember { mutableStateOf<Rect?>(null) }
+    var quizBounds by remember { mutableStateOf<Rect?>(null) }
 
     val infoText = when (hoveredButton) {
         "techniques" -> "Recall techniques and patterns through videos"
         "bodyParts" -> "Learn body parts and vital points in Korean"
         "compendium" -> "Study Taekwon-Do theory, history, and fundamentals"
+        "quiz" -> "Put everything you've learned to the test"
         else -> "Choose a topic to get started"
     }
 
@@ -75,6 +78,7 @@ fun OnboardingScreen(
                             techniquesBounds?.contains(posInWindow) == true -> "techniques"
                             bodyPartsBounds?.contains(posInWindow) == true -> "bodyParts"
                             compendiumBounds?.contains(posInWindow) == true -> "compendium"
+                            quizBounds?.contains(posInWindow) == true -> "quiz"
                             else -> null
                         }
 
@@ -96,7 +100,7 @@ fun OnboardingScreen(
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
-                .offset(y = 200.dp),
+                .offset(y = 230.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -108,7 +112,7 @@ fun OnboardingScreen(
 
             Button(
                 onClick = onOpenTechniques,
-                modifier = Modifier.width(170.dp).onGloballyPositioned {
+                modifier = Modifier.width(160.dp).onGloballyPositioned {
                     techniquesBounds = it.boundsInWindow()
                 }
             ) {
@@ -130,12 +134,23 @@ fun OnboardingScreen(
 
             Button(
                 onClick = onOpenCompendium,
-                modifier = Modifier.width(100.dp).onGloballyPositioned {
+                modifier = Modifier.width(110.dp).onGloballyPositioned {
                     compendiumBounds = it.boundsInWindow()
                 },
                 contentPadding = PaddingValues(0.dp)
             ) {
                 Text("Compendium")
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            Button(
+                onClick = onOpenQuiz,
+                modifier = Modifier.width(85.dp).onGloballyPositioned {
+                    quizBounds = it.boundsInWindow()
+                }
+            ) {
+                Text("Quiz")
             }
         }
     }

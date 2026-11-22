@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import fi.tkd.itfun.ui.theme.ITFunTheme
+import fi.tkd.itfun.quiz.QuizScreen
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -118,15 +119,17 @@ class MainActivity : ComponentActivity() {
                     )
                 } else {
                     var selectedStartPage by rememberSaveable { mutableStateOf<Int?>(null) }
+                    var isQuizOpen by rememberSaveable { mutableStateOf(false) }
 
 
-                    if (selectedStartPage == null) {
+                    if (selectedStartPage == null && !isQuizOpen) {
                         SystemBarsSolidColor(color = lightGrey, darkIcons = true)
                         OnboardingScreen(
                             backgroundColor = lightGrey,
                             onOpenTechniques = { selectedStartPage = 1 },
                             onOpenBodyParts = { selectedStartPage = 0 },
-                            onOpenCompendium = { selectedStartPage = 2 }
+                            onOpenCompendium = { selectedStartPage = 2 },
+                            onOpenQuiz = { isQuizOpen = true }
                         )
                     } else {
                         SystemBarsSolidColor(
@@ -135,11 +138,16 @@ class MainActivity : ComponentActivity() {
                         )
                         Box(Modifier.safeDrawingPadding()) {
                             Surface(Modifier.fillMaxSize()) {
-                                Pager(
-                                    contentUpdateViewModel = contentUpdateViewModel,
-                                    contentInventoryViewModel = contentInventoryViewModel,
-                                    initialPage = selectedStartPage!!
-                                )
+                                if (isQuizOpen) {
+                                    QuizScreen(onClose = { isQuizOpen = false })
+                                } else {
+                                    Pager(
+                                        contentUpdateViewModel = contentUpdateViewModel,
+                                        contentInventoryViewModel = contentInventoryViewModel,
+                                        onBackToOnboarding = { selectedStartPage = null },
+                                        initialPage = selectedStartPage!!
+                                    )
+                                }
                             }
                         }
                     }

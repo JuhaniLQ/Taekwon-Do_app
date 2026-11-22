@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
+import fi.tkd.itfun.techniques.TKDItemCategory
 
 data class TechniqueInventory(
     val name: String,

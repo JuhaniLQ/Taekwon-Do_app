@@ -3,10 +3,11 @@ package fi.tkd.itfun.data.db
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.withTransaction
-import fi.tkd.itfun.TKDItemCategory
+import fi.tkd.itfun.techniques.TKDItemCategory
 import fi.tkd.itfun.ContentManifestRepository
-import fi.tkd.itfun.TKDPatterns
 import fi.tkd.itfun.data.db.DbProvider.get
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,6 +17,11 @@ import java.io.FileOutputStream
 import java.net.URL
 
 object DbProvider {
+    internal val MIGRATION_2_3 = object : Migration(2, 3) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE compendium_entries ADD COLUMN termsJson TEXT")
+        }
+    }
 
     @Volatile private var instance: AppDatabase? = null
 
@@ -26,14 +32,19 @@ object DbProvider {
                 AppDatabase::class.java,
                 "tkd.db"
             )
+                .addMigrations(MIGRATION_2_3)
                 .fallbackToDestructiveMigration()
                 .build()
                 .also { instance = it }
         }
-    private const val TECHNIQUES_DATA_VERSION = 1
+    private const val TECHNIQUES_DATA_VERSION = 2
     private const val TECHNIQUES_VERSION_KEY = "techniques_version"
     internal const val JSON_MANIFEST_VERSION_KEY = "json_manifest_version"
+    internal const val BLACK_BELTS_ENABLED_KEY = "black belts enabled"
 
+
+    suspend fun needsSeeding(context: Context): Boolean =
+        (get(context).contentMetaDao().getValue(TECHNIQUES_VERSION_KEY) ?: 0) < TECHNIQUES_DATA_VERSION
 
     suspend fun ensureSeeded(context: Context) {
         val db = get(context)
@@ -51,8 +62,8 @@ object DbProvider {
             val compendiumEntryImageDao = db.compendiumEntryImageDao()
 
             // Grab existing items BEFORE wipe
-            val oldItemsByCode = itemDao.getAllNow()
-                .associateBy { it.techniqueCode }
+            val oldItemsByVideoKey = itemDao.getAllNow()
+                .associateBy { it.videoKey }
 
             categoryDao.deleteAll()
             patternDao.deleteAll()
@@ -64,9 +75,8 @@ object DbProvider {
             compendiumSectionDao.deleteAll()
 
             categoryDao.insertAll(TKDItemCategory.entries.map { CategoryEntity(name = it.name) })
-            patternDao.insertAll(TKDPatterns.all.map { PatternEntity(name = it) })
             val root = loadManifestJson(context)
-            seedItemsFromJson(context, db, oldItemsByCode, root)
+            seedItemsFromJson(context, db, oldItemsByVideoKey, root)
             metaDao.put(ContentMetaEntity(TECHNIQUES_VERSION_KEY, TECHNIQUES_DATA_VERSION))
         }
     }
@@ -85,6 +95,7 @@ object DbProvider {
         val current = metaDao.getValue(JSON_MANIFEST_VERSION_KEY) ?: 0
 
         if (current >= remoteVersion) {
+            seedBeltSettings(db, root)
             return@withContext UpdateResult.NoUpdate
         }
 
@@ -99,8 +110,8 @@ object DbProvider {
 
 
             // Grab existing items BEFORE wipe
-            val oldItemsByCode = itemDao.getAllNow()
-                .associateBy { it.techniqueCode }
+            val oldItemsByVideoKey = itemDao.getAllNow()
+                .associateBy { it.videoKey }
 
             categoryDao.deleteAll()
             patternDao.deleteAll()
@@ -112,9 +123,8 @@ object DbProvider {
             compendiumSectionDao.deleteAll()
 
             categoryDao.insertAll(TKDItemCategory.entries.map { CategoryEntity(name = it.name) })
-            patternDao.insertAll(TKDPatterns.all.map { PatternEntity(name = it) })
 
-            seedItemsFromJson(context, db, oldItemsByCode, root)
+            seedItemsFromJson(context, db, oldItemsByVideoKey, root)
         }
         return@withContext UpdateResult.Updated
     }
@@ -122,7 +132,7 @@ object DbProvider {
     private suspend fun seedItemsFromJson(
         context: Context,
         db: AppDatabase,
-        oldItemsByCode: Map<Int, ItemEntity>,
+        oldItemsByVideoKey: Map<String, ItemEntity>,
         root: JSONObject
     ) {
         val bodyPartsArray = root.getJSONArray("bodyParts")
@@ -130,15 +140,25 @@ object DbProvider {
         val techniquesArray = root.getJSONArray("techniques")
 
         seedBodyPartsFromArray(db, bodyPartsArray)
-        seedTechniquesFromArray(context, db, techniquesArray, oldItemsByCode, termKeyToNameMap(root))
+        seedTechniquesFromArray(context, db, techniquesArray, oldItemsByVideoKey, termKeyToNameMap(root))
         seedPatternVideoDetails(db, patternDetailsObject)
         seedCompendiumFromJson(db, root)
+        seedBeltSettings(db, root)
 
         val manifestVersion = root.optInt("version", 1)
         db.contentMetaDao().put(
             ContentMetaEntity(JSON_MANIFEST_VERSION_KEY, manifestVersion)
         )
     }
+}
+
+internal suspend fun seedBeltSettings(db: AppDatabase, root: JSONObject) {
+    db.contentMetaDao().put(
+        ContentMetaEntity(
+            DbProvider.BLACK_BELTS_ENABLED_KEY,
+            if (root.optBoolean(DbProvider.BLACK_BELTS_ENABLED_KEY, false)) 1 else 0
+        )
+    )
 }
 
 private fun termKeyToNameMap(root: JSONObject): Map<String, String> {
@@ -229,7 +249,8 @@ private suspend fun seedCompendiumFromJson(
                 titleFi = entryTitleObj?.optString("fi"),
                 descriptionEn = descriptionObj?.optString("en").orEmpty(),
                 descriptionFi = descriptionObj?.optString("fi").orEmpty(),
-                sortOrder = entryOrder++
+                sortOrder = entryOrder++,
+                termsJson = entryObj.optJSONArray("terms")?.toString()
             )
 
             val imagesArray = entryObj
@@ -258,14 +279,22 @@ private suspend fun seedCompendiumFromJson(
     imageDao.insertAll(images)
 }
 
-private suspend fun seedTechniquesFromArray(
+internal suspend fun seedTechniquesFromArray(
     context: Context,
     db: AppDatabase,
     array: org.json.JSONArray,
-    oldItemsByCode: Map<Int, ItemEntity>,
+    oldItemsByVideoKey: Map<String, ItemEntity>,
     termKeyToName : Map<String, String>
 ) {
     val catIdByName = db.categoryDao().getAllNow().associate { it.name to it.id }
+    val patternNames = linkedSetOf<String>()
+    for (i in 0 until array.length()) {
+        val patterns = array.getJSONObject(i).getJSONArray("patterns")
+        for (p in 0 until patterns.length()) {
+            patterns.getString(p).trim().takeIf { it.isNotEmpty() }?.let(patternNames::add)
+        }
+    }
+    db.patternDao().insertAll(patternNames.map { PatternEntity(name = it) })
     val patIdByName = db.patternDao().getAllNow().associate { it.name to it.id }
 
     val itemDao = db.itemDao()
@@ -292,7 +321,7 @@ private suspend fun seedTechniquesFromArray(
 
         val korean = composeKorean(termNames)
 
-        val old = oldItemsByCode[techniqueCode]
+        val old = oldItemsByVideoKey[drawableName]
 
         val expectedFile = File(
             context.getExternalFilesDir("videos"),
@@ -306,11 +335,12 @@ private suspend fun seedTechniquesFromArray(
             if (
                 old != null &&
                 !old.localVideoPath.isNullOrBlank() &&
-                File(old.localVideoPath).exists() &&
+                File(old.localVideoPath) == expectedFile &&
+                expectedFile.isFile && expectedFile.length() > 0 &&
                 old.localVideoVersion == remoteVideoVersion
             ) {
                 old.localVideoPath to old.localVideoVersion
-            } else if (recoveredPath != null) {
+            } else if (recoveredPath != null && old == null && expectedFile.length() > 0) {
                 recoveredPath to remoteVideoVersion
             } else {
                 null to null
@@ -370,17 +400,19 @@ private suspend fun seedPatternVideoDetails(
 }
 
 internal const val REMOTE_MANIFEST_URL = //please do not misuse this web address, so I can continue to offer the contents of this app
-    "https://pub-ac21b0d2bd5842ec912448a452ab1b38.r2.dev/manifest/tkd_items1.json"
+    "https://pub-ac21b0d2bd5842ec912448a452ab1b38.r2.dev/manifest/tkd_items1_0.json"
 
 private suspend fun loadManifestJson(context: Context): JSONObject =
     withContext(Dispatchers.IO) {
+        val bundled = context.assets.open("tkd_items1_0.json").bufferedReader().use {
+            JSONObject(it.readText())
+        }
         runCatching {
-            loadManifestJsonNoFallback(context) ?: error("Unable to fetch manifest")
+            val remote = loadManifestJsonNoFallback(context)
+            if (remote != null && remote.optInt("version", 1) >= bundled.optInt("version", 1)) remote else bundled
         }.getOrElse { e ->
             Log.w("DBDEBUG", "Remote manifest fetch failed, falling back to assets", e)
-            val fallbackText =
-                context.assets.open("tkd_items.json").bufferedReader().use { it.readText() }
-            JSONObject(fallbackText)
+            bundled
         }
     }
 

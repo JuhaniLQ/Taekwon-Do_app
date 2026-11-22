@@ -99,7 +99,7 @@ class ContentManifestRepository internal constructor(
     )
 
     private companion object {
-        const val DAY_MS = 24 * 60 * 60 * 1000L
+        const val DAY_MS = 1 * 60 * 60 * 1000L
         val mutex = Mutex()
     }
 }

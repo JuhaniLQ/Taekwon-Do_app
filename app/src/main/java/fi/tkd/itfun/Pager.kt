@@ -1,5 +1,6 @@
 package fi.tkd.itfun
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -32,17 +34,37 @@ import fi.tkd.itfun.data.db.CompendiumSectionEntity
 import fi.tkd.itfun.data.db.DbProvider
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import fi.tkd.itfun.body.Body
+import fi.tkd.itfun.body.BodyItem
+import fi.tkd.itfun.body.BodyRegion
+import fi.tkd.itfun.compendium.Compendium
+import fi.tkd.itfun.shared.SettingsSheet
+import fi.tkd.itfun.techniques.TKDItem
+import fi.tkd.itfun.techniques.TKDItemCategory
+import fi.tkd.itfun.techniques.Techniques
 
 @Composable
 fun Pager(
     contentUpdateViewModel: ContentUpdateViewModel,
     contentInventoryViewModel: ContentInventoryViewModel,
+    onBackToOnboarding: () -> Unit,
     initialPage: Int = 1
 ) {
     val focusManager = LocalFocusManager.current
     val context = LocalContext.current
+    val unavailableBeltToast = remember(context) {
+        Toast.makeText(context, "No techniques available for this belt yet.", Toast.LENGTH_SHORT)
+    }
+    DisposableEffect(unavailableBeltToast) {
+        onDispose { unavailableBeltToast.cancel() }
+    }
     val scope = rememberCoroutineScope()
+    var playbackSpeedStep by remember { mutableIntStateOf(10) }
     val db = remember { DbProvider.get(context) }
+    val blackBeltsEnabled by remember(db) {
+        db.contentMetaDao().observeValue(DbProvider.BLACK_BELTS_ENABLED_KEY)
+            .map { it == 1 }
+    }.collectAsState(initial = false)
 
     //screen one (body)
     val bodyPartRows by db.bodyPartDao().getAll()
@@ -94,6 +116,15 @@ fun Pager(
         tkdItemsRoom.filter {
             it.category != TKDItemCategory.STANCES
         }
+    }
+
+    val highestAvailableDan = remember(techniqueItems) {
+        techniqueItems.filter {
+            it.category == TKDItemCategory.DEFENSIVE ||
+                it.category == TKDItemCategory.OFFENSIVE ||
+                it.category == TKDItemCategory.KICKS ||
+                it.category == TKDItemCategory.ALL_PATTERNS
+        }.minOfOrNull { it.beltLevel }?.let { (-it).coerceAtLeast(0) } ?: 0
     }
 
     val bodyItems = remember(bodyPartRows) {
@@ -165,6 +196,15 @@ fun Pager(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Box(Modifier.width(20.dp * 3)) {
+                    IconButton(onClick = onBackToOnboarding) {
+                        Icon(
+                            painter = painterResource(R.drawable.arrow_back),
+                            contentDescription = "Back to onboarding",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
                 TabRow(
                     selectedTabIndex = selectedTabIndex,
                     modifier = Modifier.weight(1f)
@@ -200,7 +240,10 @@ fun Pager(
                 }
             }
             val beltGup by context.dataStore.data
-                .map { prefs -> (prefs[BELT_LEVEL] ?: 9).coerceIn(1, 9) } // default 9 = white
+                .map { prefs ->
+                    val level = prefs[BELT_LEVEL] ?: 9 // default 9 = white
+                    (if (level == 0) -1 else level).coerceIn(if (blackBeltsEnabled) -9 else 1, 9)
+                }
                 .collectAsState(initial = 9)
 
             HorizontalPager(state = pagerState) { currentPage ->
@@ -211,6 +254,8 @@ fun Pager(
                         bodyItems = bodyItems
                     )
                     1 -> ScreenTwo(
+                        playbackSpeedStep = playbackSpeedStep,
+                        onPlaybackSpeedStepChange = { playbackSpeedStep = it.coerceIn(1, 30) },
                         tkdItemsRoom = techniqueItems,
                         selectedTab = selectedTab,
                         selectedPattern = selectedPattern,
@@ -240,14 +285,20 @@ fun Pager(
                 isOpen = isSheetOpen,
                 beltGup = beltGup,
                 updateState = updateState,
+                blackBeltsEnabled = blackBeltsEnabled,
                 inventoryState = inventoryState,
                 onRefreshInventory = contentInventoryViewModel::refresh,
                 onCheckAvailableContent = contentInventoryViewModel::checkForAvailableContent,
                 onDismiss = { isSheetOpen = false },
                 onSelectBeltLevel = { uiLevel ->
-                    val newGup = 10 - uiLevel.coerceIn(1, 9)
-                    scope.launch {
-                        context.dataStore.edit { it[BELT_LEVEL] = newGup }
+                    val level = uiLevel.coerceIn(1, if (blackBeltsEnabled) 18 else 9)
+                    val newGup = if (level <= 9) 10 - level else 9 - level
+                    if (newGup < 0 && -newGup > highestAvailableDan) {
+                        unavailableBeltToast.show()
+                    } else {
+                        scope.launch {
+                            context.dataStore.edit { it[BELT_LEVEL] = newGup }
+                        }
                     }
                 },
                 onUpdateClick = contentUpdateViewModel::updateContent
@@ -275,6 +326,8 @@ fun ScreenOne(selectedTab: MutableState<String>,
 
 @Composable
 fun ScreenTwo(
+    playbackSpeedStep: Int,
+    onPlaybackSpeedStepChange: (Int) -> Unit,
               tkdItemsRoom: List<TKDItem>,
               selectedTab: MutableState<String>,
               selectedPattern: MutableState<String>,
@@ -289,6 +342,8 @@ fun ScreenTwo(
         modifier = Modifier.fillMaxSize()
     ) {
         Techniques(
+            playbackSpeedStep = playbackSpeedStep,
+            onPlaybackSpeedStepChange = onPlaybackSpeedStepChange,
             tkdItemsRoom = tkdItemsRoom,
             selectedTab = selectedTab,
             selectedPattern = selectedPattern,
