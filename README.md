@@ -22,7 +22,7 @@ Use it to **review and recall techniques** you have already learned, *not* as a 
 - Download and store content locally for offline use 
 - Update content in-app from the cloud :globe_with_meridians:
 
-• ### Video Sources & Credits
+### Video Sources & Credits
 
 The app uses video clips from the following creators:
 
